@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 140">
+  <!-- A fishing hook trying to catch a coin, and a shield that says stop -->
+  <rect width="240" height="140" rx="20" fill="#fde3dc"/>
+  <path d="M70 0v62a20 20 0 0 1-40 0v-8" fill="none" stroke="#0f2233" stroke-width="5" stroke-linecap="round"/>
+  <path d="M30 54l-7 9M30 54l9 6" stroke="#0f2233" stroke-width="5" stroke-linecap="round"/>
+  <g transform="translate(50 104)">
+    <circle r="18" fill="#ffc845"/>
+    <circle r="12" fill="none" stroke="#e0a91f" stroke-width="3"/>
+    <path d="M-4-6v12M4-6v12" stroke="#e0a91f" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <path d="M168 22l46 16v30c0 28-20 44-46 52-26-8-46-24-46-52V38z" fill="#0b6e6e" stroke="#0f2233" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M168 48v30" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="168" cy="96" r="5.5" fill="#fff"/>
+  <path d="M100 60l10 6M98 80h12" stroke="#f2674a" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import { BookOpen, CircleCheck, ChevronLeft, Clock, PiggyBank, ShieldAlert, Wallet } from "lucide-react";
 import AuthGuard from "@/components/AuthGuard";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -44,6 +45,7 @@ function Lessons() {
           const done = finished.includes(lesson.id);
           return (
             <button key={lesson.id} onClick={() => setOpen(lesson)} className="card flex flex-col text-left hover:border-flow">
+              <Image src={`/illustrations/lesson-${lesson.id}.svg`} alt="" width={240} height={140} className="mb-4 w-full" />
               <div className="flex items-center justify-between">
                 <span className="rounded-2xl bg-foam p-3 text-flow">
                   <Icon size={26} />
@@ -96,6 +98,7 @@ function LessonView({ lesson, onBack, onFinished }: { lesson: Lesson; onBack: ()
       <button onClick={onBack} className="flex items-center gap-1 font-semibold text-flow">
         <ChevronLeft size={18} /> {t("lessons.back")}
       </button>
+      <Image src={`/illustrations/lesson-${lesson.id}.svg`} alt="" width={240} height={140} className="w-full" />
       <h1 className="h1">{text.title}</h1>
       <div className="card space-y-4 text-lg leading-relaxed">
         {text.paragraphs.map((paragraph) => (

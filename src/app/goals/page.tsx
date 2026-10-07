@@ -61,7 +61,7 @@ function Goals() {
       )}
 
       {goals.length === 0 && !showForm ? (
-        <EmptyState icon={Target} title={t("goals.emptyTitle")} text={t("goals.emptyText")}>
+        <EmptyState image="/illustrations/empty-jar.svg" icon={Target} title={t("goals.emptyTitle")} text={t("goals.emptyText")}>
           <button className="btn-primary" onClick={() => setShowForm(true)}>{t("goals.new")}</button>
         </EmptyState>
       ) : (

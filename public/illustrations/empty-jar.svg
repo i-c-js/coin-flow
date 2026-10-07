@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180">
+  <!-- An empty jar waiting for its first coin -->
+  <ellipse cx="100" cy="166" rx="62" ry="8" fill="#d6e4e2"/>
+  <path d="M60 60h80v84a18 18 0 0 1-18 18H78a18 18 0 0 1-18-18z" fill="#eef5f4" stroke="#0f2233" stroke-width="4"/>
+  <rect x="54" y="48" width="92" height="14" rx="7" fill="#0b6e6e"/>
+  <path d="M60 128c10-6 20-6 30 0s20 6 30 0 15-5 20-3" fill="none" stroke="#3cc3b0" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+  <path d="M124 76v32" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <g transform="translate(100 24)">
+    <circle r="15" fill="#ffc845"/>
+    <circle r="10" fill="none" stroke="#e0a91f" stroke-width="2.5"/>
+    <path d="M-3-5v10M3-5v10" stroke="#e0a91f" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <path d="M100 42v4M92 44l-2 3M108 44l2 3" stroke="#0b6e6e" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

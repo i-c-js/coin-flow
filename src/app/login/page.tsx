@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import Wave from "@/components/Wave";
@@ -39,6 +40,7 @@ export default function LoginPage() {
       <div className="relative overflow-hidden rounded-card bg-flow p-8 pb-20 text-white">
         <p className="font-display text-3xl font-extrabold leading-tight sm:text-4xl">{t("auth.welcome")}</p>
         <p className="mt-4 text-lg text-foam">{t("auth.tagline")}</p>
+        <Image src="/illustrations/hero-flow.svg" alt="" width={320} height={260} priority className="relative z-10 mx-auto mt-6 h-48 w-auto rounded-3xl bg-surface p-3" />
         <Wave className="absolute inset-x-0 bottom-0 h-16 w-full" />
       </div>
 

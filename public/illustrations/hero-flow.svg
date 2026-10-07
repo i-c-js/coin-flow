@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260">
+  <!-- Coins flowing down a stream into a jar that fills with water -->
+  <defs>
+    <clipPath id="jar"><path d="M110 112h100v118a22 22 0 0 1-22 22h-56a22 22 0 0 1-22-22z"/></clipPath>
+    <g id="coin">
+      <circle r="14" fill="#ffc845"/>
+      <circle r="9.5" fill="none" stroke="#e0a91f" stroke-width="2.5"/>
+      <path d="M-3-5v10M3-5v10" stroke="#e0a91f" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <!-- stream -->
+  <path d="M30 18c40 0 60 20 80 45s40 35 50 35" fill="none" stroke="#d8f3ee" stroke-width="26" stroke-linecap="round"/>
+  <path d="M30 18c40 0 60 20 80 45s40 35 50 35" fill="none" stroke="#3cc3b0" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 14"/>
+  <use href="#coin" x="58" y="22"/>
+  <use href="#coin" x="104" y="56"/>
+  <use href="#coin" x="146" y="88"/>
+  <!-- jar -->
+  <g clip-path="url(#jar)">
+    <rect x="100" y="100" width="120" height="160" fill="#eef5f4"/>
+    <path d="M100 168c15-10 30-10 45 0s30 10 45 0 25-8 30-4v100H100z" fill="#3cc3b0"/>
+    <path d="M100 186c15-8 30-8 45 0s30 8 45 0 25-6 30-3v80H100z" fill="#0b6e6e" opacity=".35"/>
+    <use href="#coin" x="138" y="214"/>
+    <use href="#coin" x="176" y="226"/>
+    <circle cx="128" cy="190" r="4" fill="#fff" opacity=".7"/>
+    <circle cx="190" cy="196" r="3" fill="#fff" opacity=".7"/>
+    <circle cx="160" cy="180" r="2.5" fill="#fff" opacity=".7"/>
+  </g>
+  <path d="M110 112h100v118a22 22 0 0 1-22 22h-56a22 22 0 0 1-22-22z" fill="none" stroke="#0f2233" stroke-width="5"/>
+  <rect x="102" y="98" width="116" height="16" rx="8" fill="#0f2233"/>
+  <path d="M196 132v40" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  <!-- sparkles -->
+  <path d="M262 70l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#ffc845"/>
+  <path d="M240 150l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#f2674a"/>
+</svg>

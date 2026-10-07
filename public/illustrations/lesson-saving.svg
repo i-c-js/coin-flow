@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 140">
+  <!-- Three jars filling up step by step -->
+  <rect width="240" height="140" rx="20" fill="#fff4d6"/>
+  <defs>
+    <path id="j" d="M0 0h44v62a12 12 0 0 1-12 12H12A12 12 0 0 1 0 62z"/>
+    <clipPath id="j1"><use href="#j" x="34" y="44"/></clipPath>
+    <clipPath id="j2"><use href="#j" x="98" y="44"/></clipPath>
+    <clipPath id="j3"><use href="#j" x="162" y="44"/></clipPath>
+  </defs>
+  <rect x="34" y="96" width="44" height="30" fill="#3cc3b0" clip-path="url(#j1)"/>
+  <rect x="98" y="74" width="44" height="50" fill="#3cc3b0" clip-path="url(#j2)"/>
+  <rect x="162" y="50" width="44" height="70" fill="#3cc3b0" clip-path="url(#j3)"/>
+  <g fill="none" stroke="#0f2233" stroke-width="4">
+    <use href="#j" x="34" y="44"/><use href="#j" x="98" y="44"/><use href="#j" x="162" y="44"/>
+  </g>
+  <g fill="#0b6e6e"><rect x="30" y="36" width="52" height="10" rx="5"/><rect x="94" y="36" width="52" height="10" rx="5"/><rect x="158" y="36" width="52" height="10" rx="5"/></g>
+  <path d="M84 24l14-10 14 10M148 24l14-10 14 10" fill="none" stroke="#f2674a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="184" cy="20" r="10" fill="#ffc845" stroke="#e0a91f" stroke-width="2.5"/>
+</svg>

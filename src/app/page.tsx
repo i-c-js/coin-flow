@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Plus, ChevronRight, GraduationCap, Target, Receipt } from "lucide-react";
 import AuthGuard from "@/components/AuthGuard";
 import Wave from "@/components/Wave";
@@ -67,6 +68,14 @@ function Home({ name }: { name: string }) {
           <Plus size={22} strokeWidth={3} />
           {t("home.addExpense")}
         </button>
+        <Image
+          src="/illustrations/hero-flow.svg"
+          alt=""
+          width={320}
+          height={260}
+          priority
+          className="absolute bottom-6 right-6 hidden h-52 w-auto sm:block"
+        />
         <Wave className="absolute inset-x-0 bottom-0 h-12 w-full" />
       </section>
 
@@ -74,7 +83,7 @@ function Home({ name }: { name: string }) {
       <section>
         <SectionTitle title={t("home.yourGoals")} href="/goals" linkText={t("home.seeAll")} />
         {goals.length === 0 ? (
-          <EmptyState icon={Target} title={t("home.noGoalsTitle")} text={t("home.noGoalsText")}>
+          <EmptyState image="/illustrations/empty-jar.svg" icon={Target} title={t("home.noGoalsTitle")} text={t("home.noGoalsText")}>
             <Link href="/goals" className="btn-primary">{t("home.createGoal")}</Link>
           </EmptyState>
         ) : (
@@ -103,7 +112,7 @@ function Home({ name }: { name: string }) {
         <section>
           <SectionTitle title={t("home.recent")} href="/transactions" linkText={t("home.seeAll")} />
           {recent.length === 0 ? (
-            <EmptyState icon={Receipt} title={t("home.noTxTitle")} text={t("home.noTxText")} />
+            <EmptyState image="/illustrations/calm-water.svg" icon={Receipt} title={t("home.noTxTitle")} text={t("home.noTxText")} />
           ) : (
             <ul className="card divide-y divide-line py-2">
               {recent.map((tx) => (

@@ -54,7 +54,7 @@ function Summary() {
       </div>
 
       {byCategory.length === 0 ? (
-        <EmptyState icon={PiggyBank} title={t("summary.emptyTitle")} text={t("summary.emptyText")} />
+        <EmptyState image="/illustrations/calm-water.svg" icon={PiggyBank} title={t("summary.emptyTitle")} text={t("summary.emptyText")} />
       ) : (
         <>
           <div className="card">

@@ -81,7 +81,7 @@ function Transactions() {
       </div>
 
       {transactions.length === 0 ? (
-        <EmptyState icon={Receipt} title={t("tx.emptyTitle")} text={t("tx.emptyText")} />
+        <EmptyState image="/illustrations/calm-water.svg" icon={Receipt} title={t("tx.emptyTitle")} text={t("tx.emptyText")} />
       ) : (
         <ul className="card divide-y divide-line py-2">
           {transactions.map((tx) => (
