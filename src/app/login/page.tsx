@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
+import { useUser } from "@/lib/useUser";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import Wave from "@/components/Wave";
 
@@ -16,6 +17,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const { user } = useUser();
+
+  // Already logged in? Go to the home page instead of showing the form.
+  useEffect(() => {
+    if (user) router.replace("/");
+  }, [user, router]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,14 +31,23 @@ export default function LoginPage() {
     if (password.length < 6) return setError(t("auth.minPassword"));
 
     setBusy(true);
-    const result =
-      mode === "login"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password, options: { data: { display_name: name } } });
-    setBusy(false);
+    if (mode === "signup") {
+      const signUp = await supabase.auth.signUp({ email, password, options: { data: { display_name: name } } });
+      if (signUp.error) {
+        setBusy(false);
+        return setError(signUp.error.message);
+      }
+      // A new account should go straight to the home page.
+      // If Supabase didn't log us in automatically, log in now with the same email and password.
+      if (signUp.data.session) {
+        return router.replace("/");
+      }
+    }
 
-    if (result.error) return setError(result.error.message);
-    router.push("/");
+    const login = await supabase.auth.signInWithPassword({ email, password });
+    setBusy(false);
+    if (login.error) return setError(login.error.message);
+    router.replace("/");
   }
 
   return (
