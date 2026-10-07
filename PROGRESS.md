@@ -12,5 +12,5 @@
 ## Notes
 - Project lives in ~/Desktop/coinflow (created fresh; no design/ folder or .env.local existed).
 - All steps done. Build, lint and 14 Vitest tests pass.
-- Open item: Supabase tables returned 404 on the last check. User must run supabase/schema.sql in project mfspordpqzhvnwpvajpk.
-- Not tested end-to-end with a real account (no tables yet, and the agent doesn't create accounts).
+- Supabase tables created; email confirmation turned off by user.
+- Tested end-to-end in the browser with the user's account: add/edit/delete transaction, weekly chart, goals + estimate, lesson quiz saving, language switch. Fixed quiz answer state bug.

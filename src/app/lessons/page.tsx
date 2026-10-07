@@ -117,7 +117,7 @@ function LessonView({ lesson, onBack, onFinished }: { lesson: Lesson; onBack: ()
               <button
                 key={option}
                 disabled={checked}
-                onClick={() => setAnswers(answers.map((a, i) => (i === qi ? oi : a)))}
+                onClick={() => setAnswers((prev) => prev.map((a, i) => (i === qi ? oi : a)))}
                 className={`block w-full rounded-2xl border-2 px-4 py-3 text-left ${style}`}
               >
                 {option}
