@@ -1,0 +1,75 @@
+{
+  "nav": { "home": "Home", "money": "Money", "goals": "Goals", "learn": "Learn", "tools": "Tools", "settings": "Settings" },
+  "common": { "lei": "lei", "save": "Save", "cancel": "Cancel", "edit": "Edit", "delete": "Delete", "add": "Add", "error": "Something went wrong. Please try again.", "back": "Back", "today": "Today" },
+  "auth": {
+    "login": "Log in", "signup": "Sign up", "logout": "Log out", "email": "Email", "password": "Password", "name": "Your name",
+    "noAccount": "No account yet?", "haveAccount": "Already have an account?", "welcome": "Your money, in flow.",
+    "tagline": "Track your spending, fill up your goals and learn how money works.",
+    "minPassword": "Password must be at least 6 characters.", "missingEnv": "Supabase keys are missing from .env.local."
+  },
+  "categories": { "food": "Food & snacks", "transport": "Transport", "phone": "Phone", "going_out": "Going out", "clothes": "Clothes", "gifts": "Gifts", "other": "Other", "allowance": "Pocket money", "job": "Job" },
+  "home": {
+    "hello": "Hi, {name}!", "weekSpent": "You spent this week", "weekIncome": "You received", "addExpense": "Add expense",
+    "yourGoals": "Your goals", "seeAll": "See all", "recent": "Recent activity", "weekChart": "This week by category",
+    "noGoalsTitle": "No goals yet", "noGoalsText": "Pick something you want to save for and watch it fill up.", "createGoal": "Create a goal",
+    "noTxTitle": "All calm here", "noTxText": "Add your first expense to see where your money flows.",
+    "learnTitle": "Quick lessons", "learnText": "{done} of {total} lessons finished"
+  },
+  "tx": {
+    "title": "My money", "income": "Income", "expense": "Expense", "amount": "Amount (lei)", "category": "Category", "note": "Note (optional)", "date": "Date",
+    "addIncome": "Add income", "addExpense": "Add expense", "editTitle": "Edit", "deleteConfirm": "Delete this entry?",
+    "emptyTitle": "Nothing here yet", "emptyText": "Every leu has a story. Add your first income or expense.",
+    "balance": "Balance this month", "in": "In", "out": "Out", "weekSummary": "Weekly summary"
+  },
+  "summary": {
+    "title": "Weekly summary", "total": "Total spent", "biggest": "Biggest spending: {category}",
+    "emptyTitle": "A week with no spending", "emptyText": "You didn't spend anything this week. Nice!", "prev": "Previous week", "next": "Next week"
+  },
+  "goals": {
+    "title": "Savings goals", "new": "New goal", "name": "What are you saving for?", "target": "Target amount (lei)", "saved": "Already saved (lei)",
+    "monthly": "How much you put aside per month (lei)", "deadline": "Deadline (optional)", "addMoney": "Add money", "howMuch": "How many lei to add?",
+    "of": "of", "reachIn": "You'll get there in ~{months} months", "reachBy": "around {date}", "noEstimate": "Add a monthly amount to see when you'll get there.",
+    "done": "Goal reached!", "needPerMonth": "To hit the deadline you need {amount} lei/month", "onTrack": "You're on track for the deadline.",
+    "emptyTitle": "The container is empty", "emptyText": "Create a goal, like new headphones or a trip, and fill it drop by drop.",
+    "deleteConfirm": "Delete this goal?", "deadlineLabel": "Deadline: {date}"
+  },
+  "tools": {
+    "title": "Tools", "subtitle": "Calculate, compare and learn.",
+    "whatIf": "What if...", "whatIfText": "What a daily habit costs in a month, a year or 5 years.",
+    "payslip": "Payslip explainer", "payslipText": "From gross to net salary, explained simply.",
+    "converter": "Currency converter", "converterText": "MDL to EUR, USD, RON, UAH at the official NBM rate.",
+    "summary": "Weekly summary", "summaryText": "Where your money went this week.",
+    "settings": "Settings", "settingsText": "Language and your data."
+  },
+  "whatIf": {
+    "title": "What if...", "intro": "Small daily spending flows like a tap left open. See how much it adds up to.",
+    "habit": "Your habit", "perDay": "lei per day", "month": "Per month", "year": "Per year", "fiveYears": "In 5 years",
+    "habits": { "coffee": "Coffee", "snack": "Snack", "energy": "Energy drink", "custom": "Something else" },
+    "hint": "If you saved just half of it, in 5 years you'd have {amount} lei."
+  },
+  "payslip": {
+    "title": "Payslip explainer", "intro": "Enter the monthly gross salary (the one in the contract) and see what reaches your pocket.",
+    "gross": "Gross salary (lei per month)", "net": "You take home", "deductions": "What gets deducted",
+    "social": "Social insurance", "socialText": "Goes to CNAS for your future pension and benefits.",
+    "medical": "Medical insurance", "medicalText": "Goes to CNAM so you can see a doctor and use hospitals for free.",
+    "exemption": "Personal exemption", "exemptionText": "A part of your income that is not taxed.",
+    "taxable": "Taxable income", "incomeTax": "Income tax", "incomeTaxText": "Paid to the state for schools, roads and other public services.",
+    "employer": "Paid extra by the employer", "employerText": "Your employer also pays social insurance on top of your gross salary. It is not taken from your money.",
+    "disclaimer": "Approximate calculation for learning. The rates must be checked against official sources (sfs.md)."
+  },
+  "converter": {
+    "title": "Currency converter", "intro": "Today's official rate from the National Bank of Moldova.",
+    "amount": "Amount", "swap": "Swap", "official": "Official NBM rate for {date}", "sample": "Sample rates",
+    "sampleNote": "We couldn't load the NBM rates, so we're using sample values.", "rateLine": "1 {code} = {rate} MDL"
+  },
+  "lessons": {
+    "title": "Lessons", "intro": "Three short lessons, each with a 3-question quiz.", "done": "Finished", "start": "Start",
+    "quiz": "Quick quiz", "check": "Check", "correct": "Correct!", "wrong": "Not quite.", "score": "You got {score} out of {total} right.",
+    "passed": "Lesson finished! Your progress is saved.", "tryAgain": "Try again", "notAll": "Answer all the questions.", "back": "All lessons", "minutes": "{n} min"
+  },
+  "settings": {
+    "title": "Settings", "language": "Language", "account": "Account", "loggedAs": "Logged in as {email}",
+    "deleteData": "Delete all my data", "deleteText": "All your transactions, goals and lesson progress will be deleted. This can't be undone.",
+    "deleteConfirm": "Are you sure you want to delete all your data?", "deleted": "All your data has been deleted."
+  }
+}

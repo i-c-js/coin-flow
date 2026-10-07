@@ -1,0 +1,75 @@
+{
+  "nav": { "home": "Acasă", "money": "Bani", "goals": "Obiective", "learn": "Învață", "tools": "Unelte", "settings": "Setări" },
+  "common": { "lei": "lei", "save": "Salvează", "cancel": "Anulează", "edit": "Editează", "delete": "Șterge", "add": "Adaugă", "error": "Ceva n-a mers. Încearcă din nou.", "back": "Înapoi", "today": "Azi" },
+  "auth": {
+    "login": "Intră", "signup": "Creează cont", "logout": "Ieși", "email": "Email", "password": "Parola", "name": "Numele tău",
+    "noAccount": "Nu ai cont?", "haveAccount": "Ai deja cont?", "welcome": "Banii tăi, în flux.",
+    "tagline": "Urmărește cheltuielile, umple-ți obiectivele și învață cum funcționează banii.",
+    "minPassword": "Parola trebuie să aibă cel puțin 6 caractere.", "missingEnv": "Lipsesc cheile Supabase din .env.local."
+  },
+  "categories": { "food": "Mâncare și gustări", "transport": "Transport", "phone": "Telefon", "going_out": "Ieșiri", "clothes": "Haine", "gifts": "Cadouri", "other": "Altele", "allowance": "Bani de buzunar", "job": "Muncă" },
+  "home": {
+    "hello": "Salut, {name}!", "weekSpent": "Ai cheltuit săptămâna asta", "weekIncome": "Ai primit", "addExpense": "Adaugă cheltuială",
+    "yourGoals": "Obiectivele tale", "seeAll": "Vezi tot", "recent": "Ultimele mișcări", "weekChart": "Săptămâna pe categorii",
+    "noGoalsTitle": "Niciun obiectiv încă", "noGoalsText": "Alege ceva pentru care vrei să economisești și urmărește cum se umple.", "createGoal": "Creează un obiectiv",
+    "noTxTitle": "Liniște deplină", "noTxText": "Adaugă prima ta cheltuială ca să vezi încotro curg banii.",
+    "learnTitle": "Lecții rapide", "learnText": "{done} din {total} lecții terminate"
+  },
+  "tx": {
+    "title": "Banii mei", "income": "Venit", "expense": "Cheltuială", "amount": "Suma (lei)", "category": "Categorie", "note": "Notiță (opțional)", "date": "Data",
+    "addIncome": "Adaugă venit", "addExpense": "Adaugă cheltuială", "editTitle": "Editează", "deleteConfirm": "Ștergi această înregistrare?",
+    "emptyTitle": "Nimic aici încă", "emptyText": "Fiecare leu are o poveste. Adaugă primul venit sau prima cheltuială.",
+    "balance": "Sold luna aceasta", "in": "Intrări", "out": "Ieșiri", "weekSummary": "Rezumat săptămânal"
+  },
+  "summary": {
+    "title": "Rezumat săptămânal", "total": "Total cheltuit", "biggest": "Cele mai mari cheltuieli: {category}",
+    "emptyTitle": "O săptămână fără cheltuieli", "emptyText": "Nu ai cheltuit nimic în această săptămână. Bravo!", "prev": "Săptămâna trecută", "next": "Săptămâna următoare"
+  },
+  "goals": {
+    "title": "Obiective de economisire", "new": "Obiectiv nou", "name": "Pentru ce economisești?", "target": "Suma țintă (lei)", "saved": "Deja economisit (lei)",
+    "monthly": "Cât pui deoparte pe lună (lei)", "deadline": "Termen (opțional)", "addMoney": "Pune bani", "howMuch": "Câți lei adaugi?",
+    "of": "din", "reachIn": "Ajungi în ~{months} luni", "reachBy": "pe la {date}", "noEstimate": "Adaugă o sumă lunară ca să vezi când ajungi.",
+    "done": "Obiectiv atins!", "needPerMonth": "Pentru termen ai nevoie de {amount} lei/lună", "onTrack": "Ești pe drumul cel bun pentru termen.",
+    "emptyTitle": "Containerul e gol", "emptyText": "Creează un obiectiv, de exemplu căști noi sau o excursie, și umple-l picătură cu picătură.",
+    "deleteConfirm": "Ștergi acest obiectiv?", "deadlineLabel": "Termen: {date}"
+  },
+  "tools": {
+    "title": "Unelte", "subtitle": "Calculează, compară și învață.",
+    "whatIf": "Ce-ar fi dacă...", "whatIfText": "Cât te costă un obicei zilnic într-o lună, un an sau 5 ani.",
+    "payslip": "Fluturașul de salariu", "payslipText": "De la salariul brut la cel net, explicat simplu.",
+    "converter": "Convertor valutar", "converterText": "MDL în EUR, USD, RON, UAH după cursul BNM.",
+    "summary": "Rezumat săptămânal", "summaryText": "Pe ce s-au dus banii săptămâna asta.",
+    "settings": "Setări", "settingsText": "Limba și datele tale."
+  },
+  "whatIf": {
+    "title": "Ce-ar fi dacă...", "intro": "Micile cheltuieli zilnice curg ca un robinet lăsat deschis. Vezi cât se adună.",
+    "habit": "Obiceiul tău", "perDay": "lei pe zi", "month": "Pe lună", "year": "Pe an", "fiveYears": "În 5 ani",
+    "habits": { "coffee": "Cafea", "snack": "Gustare", "energy": "Energizant", "custom": "Altceva" },
+    "hint": "Dacă ai pune doar jumătate deoparte, în 5 ani ai avea {amount} lei."
+  },
+  "payslip": {
+    "title": "Fluturașul de salariu", "intro": "Scrie salariul brut lunar (cel din contract) și vezi ce ajunge în buzunarul tău.",
+    "gross": "Salariu brut (lei pe lună)", "net": "Primești în mână", "deductions": "Ce se reține",
+    "social": "Asigurări sociale", "socialText": "Merg la CNAS pentru pensia ta viitoare și indemnizații.",
+    "medical": "Asigurare medicală", "medicalText": "Merge la CNAM ca să ai acces gratuit la medic și spital.",
+    "exemption": "Scutire personală", "exemptionText": "O parte din venit pe care nu se plătește impozit.",
+    "taxable": "Venit impozabil", "incomeTax": "Impozit pe venit", "incomeTaxText": "Se plătește statului pentru școli, drumuri și alte servicii publice.",
+    "employer": "Plătit în plus de angajator", "employerText": "Angajatorul mai plătește asigurări sociale peste salariul tău brut. Nu se ia din banii tăi.",
+    "disclaimer": "Calcul aproximativ pentru învățare. Cotele trebuie verificate în surse oficiale (sfs.md)."
+  },
+  "converter": {
+    "title": "Convertor valutar", "intro": "Cursul oficial al Băncii Naționale a Moldovei pentru azi.",
+    "amount": "Suma", "swap": "Inversează", "official": "Cursul oficial BNM din {date}", "sample": "Curs de exemplu",
+    "sampleNote": "Nu am putut încărca cursul BNM, așa că folosim valori de exemplu.", "rateLine": "1 {code} = {rate} MDL"
+  },
+  "lessons": {
+    "title": "Lecții", "intro": "Trei lecții scurte și câte un test de 3 întrebări.", "done": "Terminată", "start": "Începe",
+    "quiz": "Test rapid", "check": "Verifică", "correct": "Corect!", "wrong": "Nu chiar.", "score": "Ai răspuns corect la {score} din {total}.",
+    "passed": "Lecție terminată! Am salvat progresul.", "tryAgain": "Încearcă din nou", "notAll": "Răspunde la toate întrebările.", "back": "Toate lecțiile", "minutes": "{n} min"
+  },
+  "settings": {
+    "title": "Setări", "language": "Limba", "account": "Cont", "loggedAs": "Conectat ca {email}",
+    "deleteData": "Șterge toate datele mele", "deleteText": "Se șterg toate tranzacțiile, obiectivele și progresul la lecții. Nu se poate anula.",
+    "deleteConfirm": "Sigur vrei să ștergi toate datele?", "deleted": "Toate datele au fost șterse."
+  }
+}

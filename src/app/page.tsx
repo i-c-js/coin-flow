@@ -1,69 +1,143 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import { Plus, ChevronRight, GraduationCap, Target, Receipt } from "lucide-react";
+import AuthGuard from "@/components/AuthGuard";
+import Wave from "@/components/Wave";
+import EmptyState from "@/components/EmptyState";
+import GoalCard from "@/components/GoalCard";
+import TransactionForm from "@/components/TransactionForm";
+import TransactionRow from "@/components/TransactionRow";
+import CategoryChart from "@/components/CategoryChart";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { supabase } from "@/lib/supabase";
+import { addDays, formatBani, startOfWeek, toDateString } from "@/lib/money";
+import { spendingByCategory, sumByType } from "@/lib/summary";
+import { LESSONS } from "@/content/lessons";
+import type { SavingsGoal, Transaction } from "@/lib/types";
+
+export default function HomePage() {
+  return <AuthGuard>{(user) => <Home name={user.user_metadata?.display_name || ""} />}</AuthGuard>;
+}
+
+function Home({ name }: { name: string }) {
+  const { t } = useLanguage();
+  const [weekTx, setWeekTx] = useState<Transaction[]>([]);
+  const [recent, setRecent] = useState<Transaction[]>([]);
+  const [goals, setGoals] = useState<SavingsGoal[]>([]);
+  const [lessonsDone, setLessonsDone] = useState(0);
+  const [showForm, setShowForm] = useState(false);
+
+  const load = useCallback(async () => {
+    const monday = startOfWeek(new Date());
+    const [week, latest, goalRows, progress] = await Promise.all([
+      supabase.from("transactions").select("*").gte("date", toDateString(monday)).lt("date", toDateString(addDays(monday, 7))),
+      supabase.from("transactions").select("*").order("date", { ascending: false }).order("created_at", { ascending: false }).limit(5),
+      supabase.from("savings_goals").select("*").order("created_at").limit(3),
+      supabase.from("lesson_progress").select("lesson_id"),
+    ]);
+    setWeekTx(week.data ?? []);
+    setRecent(latest.data ?? []);
+    setGoals(goalRows.data ?? []);
+    setLessonsDone(progress.data?.length ?? 0);
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  const spent = sumByType(weekTx, "expense");
+  const received = sumByType(weekTx, "income");
+  const byCategory = spendingByCategory(weekTx);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="space-y-8">
+      {/* Hero: this week's spending, with the big "add expense" button */}
+      <section className="relative overflow-hidden rounded-card bg-flow px-6 pb-16 pt-7 text-white sm:px-8">
+        {name && <p className="font-semibold text-foam">{t("home.hello", { name })}</p>}
+        <p className="mt-3 text-foam">{t("home.weekSpent")}</p>
+        <p className="big-number mt-1 text-5xl sm:text-6xl">
+          {formatBani(spent)} <span className="text-2xl text-wave">{t("common.lei")}</span>
+        </p>
+        <p className="mt-2 text-sm text-foam">
+          {t("home.weekIncome")}: <span className="font-bold text-white">+{formatBani(received)} {t("common.lei")}</span>
+        </p>
+        <button onClick={() => setShowForm(true)} className="btn-sun relative z-10 mt-6 px-6 py-4 text-lg">
+          <Plus size={22} strokeWidth={3} />
+          {t("home.addExpense")}
+        </button>
+        <Wave className="absolute inset-x-0 bottom-0 h-12 w-full" />
+      </section>
+
+      {/* Savings goals */}
+      <section>
+        <SectionTitle title={t("home.yourGoals")} href="/goals" linkText={t("home.seeAll")} />
+        {goals.length === 0 ? (
+          <EmptyState icon={Target} title={t("home.noGoalsTitle")} text={t("home.noGoalsText")}>
+            <Link href="/goals" className="btn-primary">{t("home.createGoal")}</Link>
+          </EmptyState>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2">
+            {goals.map((goal) => (
+              <GoalCard key={goal.id} goal={goal} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <div className="grid gap-8 md:grid-cols-2">
+        {/* This week by category */}
+        <section>
+          <SectionTitle title={t("home.weekChart")} href="/summary" linkText={t("home.seeAll")} />
+          <div className="card">
+            {byCategory.length === 0 ? (
+              <p className="py-6 text-center text-ink-soft">{t("summary.emptyText")}</p>
+            ) : (
+              <CategoryChart data={byCategory} />
+            )}
+          </div>
+        </section>
+
+        {/* Recent transactions */}
+        <section>
+          <SectionTitle title={t("home.recent")} href="/transactions" linkText={t("home.seeAll")} />
+          {recent.length === 0 ? (
+            <EmptyState icon={Receipt} title={t("home.noTxTitle")} text={t("home.noTxText")} />
+          ) : (
+            <ul className="card divide-y divide-line py-2">
+              {recent.map((tx) => (
+                <TransactionRow key={tx.id} tx={tx} />
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
+
+      {/* Lessons teaser */}
+      <Link href="/lessons" className="card flex items-center gap-4 hover:border-flow">
+        <span className="rounded-2xl bg-sun p-3 text-ink">
+          <GraduationCap size={26} />
+        </span>
+        <div className="flex-1">
+          <p className="h2">{t("home.learnTitle")}</p>
+          <p className="text-ink-soft">{t("home.learnText", { done: lessonsDone, total: LESSONS.length })}</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <ChevronRight className="text-ink-soft" />
+      </Link>
+
+      {showForm && <TransactionForm onClose={() => setShowForm(false)} onSaved={load} />}
+    </div>
+  );
+}
+
+function SectionTitle({ title, href, linkText }: { title: string; href: string; linkText: string }) {
+  return (
+    <div className="mb-3 flex items-center justify-between">
+      <h2 className="h2">{title}</h2>
+      <Link href={href} className="flex items-center text-sm font-semibold text-flow">
+        {linkText} <ChevronRight size={16} />
+      </Link>
     </div>
   );
 }

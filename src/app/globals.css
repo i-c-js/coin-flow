@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* CoinFlow theme: "flow" — money flows like water.
+   All colors, fonts and radii live here so every page looks the same. */
+@theme {
+  --color-ink: #0f2233;        /* main text, deep water */
+  --color-ink-soft: #4a5d6b;   /* secondary text */
+  --color-mist: #eef5f4;       /* page background */
+  --color-surface: #ffffff;    /* cards */
+  --color-line: #d6e4e2;       /* borders */
+  --color-flow: #0b6e6e;       /* primary: deep teal water */
+  --color-flow-dark: #08504f;
+  --color-wave: #3cc3b0;       /* lighter water, fills */
+  --color-foam: #d8f3ee;       /* very light water */
+  --color-sun: #ffc845;        /* call-to-action highlight */
+  --color-coral: #f2674a;      /* expenses */
+  --color-leaf: #1e9e5a;       /* income */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-unbounded), sans-serif; /* headings + big numbers */
+  --font-sans: var(--font-onest), sans-serif;        /* body text */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --radius-card: 1.5rem;
+  --radius-pill: 999px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-mist);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Reusable building blocks (Tailwind v4 custom utilities) */
+@utility card {
+  @apply rounded-card bg-surface border border-line p-5 sm:p-6;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-pill px-5 py-3 font-semibold transition active:scale-95 disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-flow text-white hover:bg-flow-dark;
+}
+@utility btn-sun {
+  @apply btn bg-sun text-ink hover:brightness-95;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-surface text-ink hover:bg-foam;
+}
+@utility input {
+  @apply w-full rounded-2xl border border-line bg-surface px-4 py-3 text-ink outline-none focus:border-flow focus:ring-2 focus:ring-foam;
+}
+@utility label {
+  @apply mb-1 block text-sm font-medium text-ink-soft;
+}
+@utility h1 {
+  @apply font-display text-2xl font-bold sm:text-3xl;
+}
+@utility h2 {
+  @apply font-display text-lg font-bold;
+}
+@utility big-number {
+  @apply font-display font-extrabold tracking-tight;
 }
