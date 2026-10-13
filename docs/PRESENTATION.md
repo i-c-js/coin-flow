@@ -5,7 +5,7 @@
 Speak in your own words; these are just the points. Practise out loud with a timer at least twice.
 
 **1. Hook (30 s)**
-Ask the audience: *"If you buy a 35 lei coffee every day, how much is that in 5 years?"* Let them guess, then show the what-if page: **63 875 lei**.
+Ask the audience: *"If you buy a 25 lei coffee every day, how much is that in 5 years?"* Let them guess, then show the what-if page: **45 625 lei**.
 
 **2. The problem (40 s)**
 Teens get pocket money and first salaries, but nobody teaches how to manage them. Apps are for adults, in English, and don't know Moldovan taxes. Mention the UN goals: **Goal 4, Quality Education** and **Goal 1, No Poverty**.

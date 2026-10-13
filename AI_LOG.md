@@ -62,7 +62,7 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 - [x] I checked the lesson texts and quiz answers in all three languages
 - [x] I tried every feature on my phone and on a computer
 - [x] I ran `npm test` and saw all 25 tests pass (13 Oct 2026)
-- [ ] I changed something in the code myself
+- [x] I changed something in the code myself: in `src/app/what-if/page.tsx` I changed the coffee preset in the what-if simulator from 35 to 25 lei per day
 
 ## Responsibility, licences and privacy
 

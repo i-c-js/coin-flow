@@ -51,7 +51,7 @@ Example: 1 200 lei goal, 400 saved, 150/month → 800 ÷ 150 = 5.33 → **6 mont
 
 **Deadline** (`monthlyNeededForDeadline`): remaining ÷ months until the deadline.
 
-**What if** (`whatIfTotals`): daily × 30, × 365, × 365 × 5. 35 lei/day → 1 050 / 12 775 / 63 875 lei.
+**What if** (`whatIfTotals`): daily × 30, × 365, × 365 × 5. 25 lei/day → 750 / 9 125 / 45 625 lei.
 
 **Payslip** (`calculatePayslip`), for 10 000 lei gross:
 - social insurance 6% = 600, medical insurance 9% = 900

@@ -26,7 +26,7 @@ CoinFlow is made for this age group: simple, visual, in the three languages spok
 | 4 | Weekly summary | Bar chart of spending by category; go back week by week. |
 | 5 | Money flow | A diagram where income streams into your wallet and out into categories (or stays "left over"). |
 | 6 | Savings goals | Name, target, optional deadline. Each goal is a jar that fills up, with an estimate of when you'll reach it and how much per month you need for the deadline. |
-| 7 | What if... | Slider for a daily habit (e.g. 35 lei coffee): what it costs per month, year and 5 years. |
+| 7 | What if... | Slider for a daily habit (e.g. a 25 lei coffee): what it costs per month, year and 5 years. |
 | 8 | Payslip explainer | Type a gross salary, see the net salary and each tax explained in simple words. |
 | 9 | Currency converter | MDL ⇄ EUR, USD, RON, UAH at the National Bank of Moldova's official rate of the day. Shows "sample rates" if the bank can't be reached. |
 | 10 | Lessons | Budgeting, saving and spotting scams, each with a 3-question quiz. Finished lessons are saved. |

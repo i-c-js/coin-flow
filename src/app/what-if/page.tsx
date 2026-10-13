@@ -7,9 +7,8 @@ import { whatIfTotals } from "@/lib/calculations";
 import { formatBani, leiToBani } from "@/lib/money";
 import Wave from "@/components/Wave";
 
-// Preset habits with a typical daily price in lei.
 const HABITS = [
-  { id: "coffee", icon: Coffee, lei: 35 },
+  { id: "coffee", icon: Coffee, lei: 25 },
   { id: "snack", icon: Cookie, lei: 20 },
   { id: "energy", icon: Zap, lei: 25 },
   { id: "custom", icon: Ellipsis, lei: 50 },
@@ -18,7 +17,7 @@ const HABITS = [
 export default function WhatIfPage() {
   const { t } = useLanguage();
   const [habit, setHabit] = useState("coffee");
-  const [dailyLei, setDailyLei] = useState(35);
+  const [dailyLei, setDailyLei] = useState(25);
   const totals = whatIfTotals(leiToBani(dailyLei));
 
   return (
