@@ -24,3 +24,4 @@
 - [x] Responsible AI: full AI_LOG (prompts, what AI did vs me, review, licences, privacy)
 - [x] Presentation + stand: docs/PRESENTATION.md, printable poster
 - [x] Screenshots in docs/screenshots/, money flow chart verified with real data, demo data removed. Tax rates confirmed by user (2026-10-13).
+- [x] Live on Vercel: https://coin-flow-theta.vercel.app (auto-deploys from GitHub main). Poster QR set by user.

@@ -2,6 +2,8 @@
 
 **Personal finance for teenagers in Moldova.** Money flows like water: see where it goes, and fill your savings goals like containers.
 
+**Live app: https://coin-flow-theta.vercel.app** · Stand poster: https://coin-flow-theta.vercel.app/poster.html
+
 A school project, built with Next.js and Supabase. Free to use, no ads, no AI inside the app. Available in Romanian, Russian and English.
 
 ![CoinFlow home page](docs/screenshots/home.png)
