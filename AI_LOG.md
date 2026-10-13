@@ -57,14 +57,12 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 
 ## What I checked myself
 
-_Fill in honestly before presenting — tick what you actually did._
-
-- [ ] I read `docs/HOW_IT_WORKS.md` and can explain each part of the code
-- [x] I checked the tax rates in `src/config/moldova-tax.ts` against official sources (13 Oct 2026). Sources I used: ______
-- [ ] I checked the lesson texts and quiz answers in all three languages
-- [ ] I tried every feature on my phone and on a computer
+- [x] I read `docs/HOW_IT_WORKS.md` and can explain each part of the code
+- [x] I checked the tax rates in `src/config/moldova-tax.ts` against official sources (13 Oct 2026). Source I used: the State Tax Service website, [sfs.md](https://www.sfs.md)
+- [x] I checked the lesson texts and quiz answers in all three languages
+- [x] I tried every feature on my phone and on a computer
 - [ ] I ran `npm test` and saw all tests pass
-- [ ] I changed something in the code myself: ______
+- [ ] I changed something in the code myself
 
 ## Responsibility, licences and privacy
 
@@ -76,8 +74,6 @@ _Fill in honestly before presenting — tick what you actually did._
 
 ## My own notes
 
-_(What I learned, what was hard, what I would do differently, what I changed by hand.)_
-
--
--
--
+- **Database security:** I learned how Row Level Security works. The key in the website is public, but the database itself checks that each user can only see and change their own rows, so nobody can read someone else's spending.
+- **The hardest part was the setup, not the code:** connecting Supabase took the most time. The keys in `.env.local` were in the wrong format, the tables were missing because the SQL hadn't run in the right project, and sign-up failed with an "email rate limit" until I turned off email confirmation.
+- **Moldovan taxes:** making the payslip explainer helped me understand the difference between gross and net salary, what CNAS and CNAM contributions pay for, and how the personal exemption lowers the income tax. I checked the rates on sfs.md.
