@@ -20,6 +20,7 @@
 - [x] Functionality: edit goals, validation messages, language saved to profile and restored on login
 - [x] Originality: monthly "money flow" diagram (income -> wallet -> categories + saved)
 - [x] Technical: more unit tests + GitHub Actions CI (lint, test, build)
-- [ ] Documentation: README with screenshots, architecture, DB diagram, credits; docs/HOW_IT_WORKS.md
-- [ ] Responsible AI: full AI_LOG (prompts, what AI did vs me, review, licences, privacy)
-- [ ] Presentation + stand: docs/PRESENTATION.md, printable poster
+- [x] Documentation: README with screenshots, architecture, DB diagram, credits; docs/HOW_IT_WORKS.md
+- [x] Responsible AI: full AI_LOG (prompts, what AI did vs me, review, licences, privacy)
+- [x] Presentation + stand: docs/PRESENTATION.md, printable poster
+- TODO: screenshots in docs/screenshots/ (home, goals, summary, payslip, lessons) need a logged-in session; verify money flow chart with real data.
