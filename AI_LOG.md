@@ -61,7 +61,7 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 - [x] I checked the tax rates in `src/config/moldova-tax.ts` against official sources (13 Oct 2026). Source I used: the State Tax Service website, [sfs.md](https://www.sfs.md)
 - [x] I checked the lesson texts and quiz answers in all three languages
 - [x] I tried every feature on my phone and on a computer
-- [ ] I ran `npm test` and saw all tests pass
+- [x] I ran `npm test` and saw all 25 tests pass (13 Oct 2026)
 - [ ] I changed something in the code myself
 
 ## Responsibility, licences and privacy
