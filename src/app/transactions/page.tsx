@@ -7,6 +7,7 @@ import AuthGuard from "@/components/AuthGuard";
 import EmptyState from "@/components/EmptyState";
 import TransactionForm from "@/components/TransactionForm";
 import TransactionRow from "@/components/TransactionRow";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { supabase } from "@/lib/supabase";
 import { formatBani, toDateString } from "@/lib/money";
@@ -23,6 +24,7 @@ function Transactions() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [formType, setFormType] = useState<TransactionType | null>(null);
   const [editing, setEditing] = useState<Transaction | null>(null);
+  const [deleting, setDeleting] = useState<Transaction | null>(null);
 
   const load = useCallback(async () => {
     const { data } = await supabase
@@ -39,7 +41,6 @@ function Transactions() {
   }, [load]);
 
   async function remove(tx: Transaction) {
-    if (!confirm(t("tx.deleteConfirm"))) return;
     await supabase.from("transactions").delete().eq("id", tx.id);
     load();
   }
@@ -85,7 +86,7 @@ function Transactions() {
       ) : (
         <ul className="card divide-y divide-line py-2">
           {transactions.map((tx) => (
-            <TransactionRow key={tx.id} tx={tx} onEdit={() => setEditing(tx)} onDelete={() => remove(tx)} />
+            <TransactionRow key={tx.id} tx={tx} onEdit={() => setEditing(tx)} onDelete={() => setDeleting(tx)} />
           ))}
         </ul>
       )}
@@ -99,6 +100,16 @@ function Transactions() {
             setEditing(null);
           }}
           onSaved={load}
+        />
+      )}
+
+      {deleting && (
+        <ConfirmDialog
+          title={t("tx.deleteConfirm")}
+          text={deleting.note || t(`categories.${deleting.category}`)}
+          confirmLabel={t("common.delete")}
+          onConfirm={() => remove(deleting)}
+          onClose={() => setDeleting(null)}
         />
       )}
     </div>

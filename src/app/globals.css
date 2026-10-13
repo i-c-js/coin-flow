@@ -23,6 +23,12 @@
   --radius-pill: 999px;
 }
 
+/* Clear keyboard focus ring on every button, link and input */
+:focus-visible {
+  outline: 3px solid var(--color-wave);
+  outline-offset: 2px;
+}
+
 body {
   background: var(--color-mist);
   color: var(--color-ink);

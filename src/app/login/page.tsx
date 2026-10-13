@@ -9,7 +9,7 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 import Wave from "@/components/Wave";
 
 export default function LoginPage() {
-  const { t } = useLanguage();
+  const { t, lang, setLang } = useLanguage();
   const router = useRouter();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [name, setName] = useState("");
@@ -40,6 +40,7 @@ export default function LoginPage() {
       // A new account should go straight to the home page.
       // If Supabase didn't log us in automatically, log in now with the same email and password.
       if (signUp.data.session) {
+        await supabase.from("profiles").update({ language: lang }).eq("id", signUp.data.session.user.id);
         return router.replace("/");
       }
     }
@@ -47,6 +48,11 @@ export default function LoginPage() {
     const login = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
     if (login.error) return setError(login.error.message);
+
+    // Use the language this person picked last time (saved in their profile).
+    const { data: profile } = await supabase.from("profiles").select("language").eq("id", login.data.user.id).single();
+    if (mode === "login" && profile?.language) setLang(profile.language);
+    else await supabase.from("profiles").update({ language: lang }).eq("id", login.data.user.id);
     router.replace("/");
   }
 

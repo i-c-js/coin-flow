@@ -2,7 +2,7 @@
 
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { estimateGoal, goalPercent, monthlyNeededForDeadline } from "@/lib/calculations";
-import { formatBani } from "@/lib/money";
+import { formatBani, formatDate, parseDate } from "@/lib/money";
 import type { SavingsGoal } from "@/lib/types";
 import GoalJar from "./GoalJar";
 
@@ -11,11 +11,11 @@ export default function GoalCard({ goal, children }: { goal: SavingsGoal; childr
   const { t, lang } = useLanguage();
   const percent = goalPercent(goal.target_bani, goal.saved_bani);
   const estimate = estimateGoal(goal.target_bani, goal.saved_bani, goal.monthly_bani);
-  const formatDate = (date: Date) => date.toLocaleDateString(lang, { month: "long", year: "numeric" });
+  const monthYear = (date: Date) => date.toLocaleDateString(lang, { month: "long", year: "numeric" });
 
   let deadlineText = "";
   if (goal.deadline && !estimate.done) {
-    const needed = monthlyNeededForDeadline(estimate.remainingBani, new Date(goal.deadline));
+    const needed = monthlyNeededForDeadline(estimate.remainingBani, parseDate(goal.deadline));
     deadlineText = goal.monthly_bani >= needed ? t("goals.onTrack") : t("goals.needPerMonth", { amount: formatBani(needed) });
   }
 
@@ -32,12 +32,12 @@ export default function GoalCard({ goal, children }: { goal: SavingsGoal; childr
           {estimate.done
             ? t("goals.done")
             : estimate.months !== null && estimate.reachDate
-              ? `${t("goals.reachIn", { months: estimate.months })}, ${t("goals.reachBy", { date: formatDate(estimate.reachDate) })}`
+              ? `${t("goals.reachIn", { months: estimate.months })}, ${t("goals.reachBy", { date: monthYear(estimate.reachDate) })}`
               : t("goals.noEstimate")}
         </p>
         {goal.deadline && (
           <p className="mt-1 text-sm text-ink-soft">
-            {t("goals.deadlineLabel", { date: goal.deadline })}
+            {t("goals.deadlineLabel", { date: formatDate(goal.deadline, lang) })}
             {deadlineText && <span className="block font-semibold text-ink">{deadlineText}</span>}
           </p>
         )}

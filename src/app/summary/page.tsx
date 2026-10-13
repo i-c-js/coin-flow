@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight, PiggyBank } from "lucide-react";
 import AuthGuard from "@/components/AuthGuard";
 import EmptyState from "@/components/EmptyState";
 import CategoryChart from "@/components/CategoryChart";
+import MoneyFlowChart from "@/components/MoneyFlowChart";
+import { buildMoneyFlow } from "@/lib/flow";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { supabase } from "@/lib/supabase";
 import { addDays, formatBani, startOfWeek, toDateString } from "@/lib/money";
@@ -19,6 +21,7 @@ function Summary() {
   const { t, lang } = useLanguage();
   const [weekOffset, setWeekOffset] = useState(0); // 0 = this week, -1 = last week...
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [monthTx, setMonthTx] = useState<Transaction[]>([]);
 
   const monday = addDays(startOfWeek(new Date()), weekOffset * 7);
   const sunday = addDays(monday, 6);
@@ -35,6 +38,19 @@ function Summary() {
       .then(({ data }) => setTransactions(data ?? []));
   }, [from, to]);
 
+  // This month's income and expenses, for the money flow diagram
+  useEffect(() => {
+    const now = new Date();
+    supabase
+      .from("transactions")
+      .select("*")
+      .gte("date", toDateString(new Date(now.getFullYear(), now.getMonth(), 1)))
+      .lt("date", toDateString(new Date(now.getFullYear(), now.getMonth() + 1, 1)))
+      .then(({ data }) => setMonthTx(data ?? []));
+  }, []);
+
+  const flow = buildMoneyFlow(monthTx);
+  const monthName = new Date().toLocaleDateString(lang, { month: "long", year: "numeric" });
   const total = sumByType(transactions, "expense");
   const byCategory = spendingByCategory(transactions);
   const range = `${monday.toLocaleDateString(lang, { day: "numeric", month: "short" })} – ${sunday.toLocaleDateString(lang, { day: "numeric", month: "short" })}`;
@@ -69,6 +85,22 @@ function Summary() {
           </div>
         </>
       )}
+
+      <section className="space-y-3">
+        <div>
+          <h2 className="h2">{t("flow.title")}</h2>
+          <p className="text-ink-soft">{t("flow.subtitle", { month: monthName })}</p>
+        </div>
+        <div className="card overflow-x-auto">
+          {flow ? (
+            <div className="min-w-[520px]">
+              <MoneyFlowChart flow={flow} />
+            </div>
+          ) : (
+            <p className="py-6 text-center text-ink-soft">{t("flow.empty")}</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

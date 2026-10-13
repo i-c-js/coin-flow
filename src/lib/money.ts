@@ -41,3 +41,21 @@ export function addDays(date: Date, days: number): Date {
   result.setDate(result.getDate() + days);
   return result;
 }
+
+// Reads what the user typed ("12,50" or "12.5") and returns bani, or null if it isn't a positive amount.
+export function parseLeiInput(text: string): number | null {
+  const lei = Number(text.trim().replace(",", "."));
+  if (!Number.isFinite(lei) || lei <= 0 || lei > 10_000_000) return null;
+  return leiToBani(lei);
+}
+
+// Shows a "YYYY-MM-DD" date the way people read it in the chosen language, e.g. "7 oct. 2026".
+export function formatDate(isoDate: string, lang: string): string {
+  return parseDate(isoDate).toLocaleDateString(lang, { day: "numeric", month: "short", year: "numeric" });
+}
+
+// "YYYY-MM-DD" -> Date at local midnight (new Date("2026-10-07") would use UTC instead).
+export function parseDate(isoDate: string): Date {
+  const [y, m, d] = isoDate.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}

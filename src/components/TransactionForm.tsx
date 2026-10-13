@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES, type TransactionType } from "@/lib/categories";
-import { leiToBani, toDateString } from "@/lib/money";
+import { parseLeiInput, toDateString } from "@/lib/money";
+import Modal from "./Modal";
 import type { Transaction } from "@/lib/types";
 
 // Pop-up form to add or edit income / expenses.
@@ -39,8 +39,8 @@ export default function TransactionForm({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const amountBani = leiToBani(Number(amount.replace(",", ".")));
-    if (!amountBani || amountBani <= 0) return;
+    const amountBani = parseLeiInput(amount);
+    if (amountBani === null) return setError(t("common.amountError"));
 
     setBusy(true);
     const row = { type, amount_bani: amountBani, category, note: note || null, date };
@@ -55,18 +55,8 @@ export default function TransactionForm({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 sm:items-center" onClick={onClose}>
-      <form
-        onSubmit={handleSubmit}
-        onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md space-y-4 rounded-t-card bg-surface p-6 sm:rounded-card"
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="h2">{editing ? t("tx.editTitle") : type === "expense" ? t("tx.addExpense") : t("tx.addIncome")}</h2>
-          <button type="button" onClick={onClose} className="rounded-full p-1 text-ink-soft hover:bg-foam" aria-label={t("common.cancel")}>
-            <X />
-          </button>
-        </div>
+    <Modal title={editing ? t("tx.editTitle") : type === "expense" ? t("tx.addExpense") : t("tx.addIncome")} onClose={onClose}>
+      <form onSubmit={handleSubmit} className="space-y-4">
 
         {/* Expense / income switch */}
         <div className="grid grid-cols-2 rounded-pill bg-mist p-1">
@@ -106,6 +96,7 @@ export default function TransactionForm({
                 type="button"
                 key={id}
                 onClick={() => setCategory(id)}
+                aria-pressed={category === id}
                 className={`flex flex-col items-center gap-1 rounded-2xl border-2 p-2 text-[11px] font-semibold leading-tight ${
                   category === id ? "border-flow bg-foam text-ink" : "border-transparent bg-mist text-ink-soft"
                 }`}
@@ -128,10 +119,10 @@ export default function TransactionForm({
           </div>
         </div>
 
-        {error && <p className="text-sm font-medium text-coral">{error}</p>}
+        {error && <p role="alert" className="text-sm font-medium text-coral">{error}</p>}
 
         <button className="btn-primary w-full" disabled={busy}>{t("common.save")}</button>
       </form>
-    </div>
+    </Modal>
   );
 }

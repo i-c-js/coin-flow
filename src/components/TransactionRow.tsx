@@ -3,7 +3,7 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { findCategory } from "@/lib/categories";
-import { formatBani } from "@/lib/money";
+import { formatBani, formatDate } from "@/lib/money";
 import type { Transaction } from "@/lib/types";
 
 export default function TransactionRow({
@@ -15,7 +15,7 @@ export default function TransactionRow({
   onEdit?: () => void;
   onDelete?: () => void;
 }) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { icon: Icon, color } = findCategory(tx.type, tx.category);
   const isExpense = tx.type === "expense";
 
@@ -27,7 +27,7 @@ export default function TransactionRow({
       <div className="min-w-0 flex-1">
         <p className="truncate font-semibold">{tx.note || t(`categories.${tx.category}`)}</p>
         <p className="text-xs text-ink-soft">
-          {t(`categories.${tx.category}`)} · {tx.date}
+          {t(`categories.${tx.category}`)} · {formatDate(tx.date, lang)}
         </p>
       </div>
       <p className={`font-display font-bold ${isExpense ? "text-coral" : "text-leaf"}`}>

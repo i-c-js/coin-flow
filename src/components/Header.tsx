@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { House, Wallet, Target, GraduationCap, Calculator, Settings, LogOut } from "lucide-react";
+import { House, Wallet, Target, GraduationCap, Calculator, Settings, LogOut, LogIn } from "lucide-react";
 import Logo from "./Logo";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -34,15 +34,19 @@ export default function Header() {
 
   return (
     <>
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-50 focus:rounded-pill focus:bg-sun focus:px-4 focus:py-2 focus:font-bold">
+        {t("common.skip")}
+      </a>
       <header className="sticky top-0 z-30 border-b border-line bg-mist/95">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
           <Logo />
-          {user && (
+          {pathname !== "/login" && (
             <nav className="hidden items-center gap-1 md:flex">
               {NAV.map(({ href, key, icon: Icon }) => (
                 <Link
                   key={href}
                   href={href}
+                  aria-current={isActive(href) ? "page" : undefined}
                   className={`flex items-center gap-1.5 rounded-pill px-3 py-2 text-sm font-semibold ${
                     isActive(href) ? "bg-flow text-white" : "text-ink-soft hover:bg-foam hover:text-ink"
                   }`}
@@ -55,6 +59,11 @@ export default function Header() {
           )}
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
+            {!user && pathname !== "/login" && (
+              <Link href="/login" className="btn-primary px-4 py-2 text-sm">
+                <LogIn size={16} /> {t("common.login")}
+              </Link>
+            )}
             {user && (
               <>
                 <Link href="/settings" aria-label={t("nav.settings")} className="rounded-full p-2 text-ink-soft hover:bg-foam">
@@ -70,7 +79,7 @@ export default function Header() {
       </header>
 
       {/* Bottom navigation for phones */}
-      {user && (
+      {pathname !== "/login" && (
         <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface md:hidden">
           <div className="mx-auto grid max-w-md grid-cols-5">
             {NAV.map(({ href, key, icon: Icon }) => (

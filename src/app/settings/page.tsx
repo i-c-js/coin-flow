@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LogOut, Trash2 } from "lucide-react";
 import AuthGuard from "@/components/AuthGuard";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import { LANGS, useLanguage, type Lang } from "@/i18n/LanguageProvider";
 import { supabase } from "@/lib/supabase";
 
@@ -17,6 +18,7 @@ function Settings({ userId, email }: { userId: string; email: string }) {
   const { t, lang, setLang } = useLanguage();
   const router = useRouter();
   const [message, setMessage] = useState("");
+  const [confirming, setConfirming] = useState(false);
 
   async function changeLanguage(newLang: Lang) {
     setLang(newLang);
@@ -24,7 +26,6 @@ function Settings({ userId, email }: { userId: string; email: string }) {
   }
 
   async function deleteAllData() {
-    if (!confirm(t("settings.deleteConfirm"))) return;
     // Row Level Security makes sure these only touch the current user's rows.
     const results = await Promise.all([
       supabase.from("transactions").delete().eq("user_id", userId),
@@ -69,11 +70,21 @@ function Settings({ userId, email }: { userId: string; email: string }) {
       <section className="card space-y-3 border-coral/40">
         <h2 className="h2 text-coral">{t("settings.deleteData")}</h2>
         <p className="text-ink-soft">{t("settings.deleteText")}</p>
-        <button className="btn bg-coral text-white" onClick={deleteAllData}>
+        <button className="btn bg-coral text-white" onClick={() => setConfirming(true)}>
           <Trash2 size={18} /> {t("settings.deleteData")}
         </button>
-        {message && <p className="font-semibold">{message}</p>}
+        {message && <p role="status" className="font-semibold">{message}</p>}
       </section>
+
+      {confirming && (
+        <ConfirmDialog
+          title={t("settings.deleteConfirm")}
+          text={t("settings.deleteText")}
+          confirmLabel={t("settings.deleteData")}
+          onConfirm={deleteAllData}
+          onClose={() => setConfirming(false)}
+        />
+      )}
     </div>
   );
 }
