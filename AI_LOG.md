@@ -60,7 +60,7 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 _Fill in honestly before presenting — tick what you actually did._
 
 - [ ] I read `docs/HOW_IT_WORKS.md` and can explain each part of the code
-- [ ] I checked the tax rates in `src/config/moldova-tax.ts` against official sources (sfs.md, legis.md): ______
+- [x] I checked the tax rates in `src/config/moldova-tax.ts` against official sources (13 Oct 2026). Sources I used: ______
 - [ ] I checked the lesson texts and quiz answers in all three languages
 - [ ] I tried every feature on my phone and on a computer
 - [ ] I ran `npm test` and saw all tests pass

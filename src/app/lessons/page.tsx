@@ -45,7 +45,7 @@ function Lessons() {
           const done = finished.includes(lesson.id);
           return (
             <button key={lesson.id} onClick={() => setOpen(lesson)} className="card flex flex-col text-left hover:border-flow">
-              <Image src={`/illustrations/lesson-${lesson.id}.svg`} alt="" width={240} height={140} className="mb-4 w-full" />
+              <Image src={`/illustrations/lesson-${lesson.id}.svg`} alt="" width={240} height={140} className="mb-4 h-auto max-h-40 w-full object-contain" />
               <div className="flex items-center justify-between">
                 <span className="rounded-2xl bg-foam p-3 text-flow">
                   <Icon size={26} />

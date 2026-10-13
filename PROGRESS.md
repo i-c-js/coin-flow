@@ -23,4 +23,4 @@
 - [x] Documentation: README with screenshots, architecture, DB diagram, credits; docs/HOW_IT_WORKS.md
 - [x] Responsible AI: full AI_LOG (prompts, what AI did vs me, review, licences, privacy)
 - [x] Presentation + stand: docs/PRESENTATION.md, printable poster
-- TODO: screenshots in docs/screenshots/ (home, goals, summary, payslip, lessons) need a logged-in session; verify money flow chart with real data.
+- [x] Screenshots in docs/screenshots/, money flow chart verified with real data, demo data removed. Tax rates confirmed by user (2026-10-13).

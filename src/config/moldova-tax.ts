@@ -3,6 +3,7 @@
 // IMPORTANT: check these numbers against official Moldovan sources before presenting
 // (Serviciul Fiscal de Stat – sfs.md, Codul Fiscal on legis.md, CNAS and CNAM).
 // Rates and the personal exemption can change every year.
+// Last checked by the author: 13 October 2026.
 
 export const MOLDOVA_TAX = {
   year: 2026,
