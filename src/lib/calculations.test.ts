@@ -48,20 +48,31 @@ describe("what-if totals", () => {
   });
 });
 
-describe("payslip", () => {
+describe("payslip (Moldova 2026 rules)", () => {
   it("calculates a 10 000 lei gross salary", () => {
     const slip = calculatePayslip(1000000);
-    expect(slip.socialBani).toBe(60000); // 6%
+    expect(slip.socialBani).toBe(0); // employee pays no social contribution since 2021
     expect(slip.medicalBani).toBe(90000); // 9%
-    expect(slip.exemptionBani).toBe(250000); // 30 000 / 12
-    expect(slip.taxableBani).toBe(600000);
-    expect(slip.incomeTaxBani).toBe(72000); // 12% of 6 000
-    expect(slip.netBani).toBe(778000);
+    expect(slip.exemptionBani).toBe(247500); // 29 700 / 12
+    expect(slip.taxableBani).toBe(662500); // 10 000 - 900 - 2 475
+    expect(slip.incomeTaxBani).toBe(79500); // 12% of 6 625
+    expect(slip.netBani).toBe(830500); // 8 305 lei, same as public 2026 calculators
+    expect(slip.employerSocialBani).toBe(240000); // 24% paid on top by the employer
   });
   it("never has negative tax for small salaries", () => {
     const slip = calculatePayslip(200000);
     expect(slip.incomeTaxBani).toBe(0);
-    expect(slip.netBani).toBe(200000 - 12000 - 18000);
+    expect(slip.netBani).toBe(200000 - 18000);
+  });
+  it("adds 825 lei/month exemption for each dependant", () => {
+    const slip = calculatePayslip(1000000, 2);
+    expect(slip.exemptionBani).toBe(247500 + 2 * 82500);
+    expect(slip.incomeTaxBani).toBe(Math.round((1000000 - 90000 - 412500) * 0.12));
+  });
+  it("gives no exemption when yearly taxable income is 360 000 lei or more", () => {
+    const slip = calculatePayslip(4000000); // 40 000 lei/month -> 436 800 lei/year after medical
+    expect(slip.exemptionBani).toBe(0);
+    expect(slip.netBani).toBe(4000000 - 360000 - 436800);
   });
 });
 

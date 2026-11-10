@@ -18,13 +18,13 @@ export default function MoneyFlowChart({ flow }: { flow: MoneyFlow }) {
   };
 
   return (
-    <div className="h-80 w-full" role="img" aria-label={t("flow.title")}>
+    <div className="h-96 w-full" role="img" aria-label={t("flow.title")}>
       <ResponsiveContainer width="100%" height="100%">
         <Sankey
           data={data}
           nodeWidth={14}
           nodePadding={18}
-          margin={{ top: 10, bottom: 10, left: 4, right: 4 }}
+          margin={{ top: 16, bottom: 28, left: 4, right: 4 }}
           node={FlowNodeShape}
           link={FlowLinkShape}
         >

@@ -25,3 +25,9 @@
 - [x] Presentation + stand: docs/PRESENTATION.md, printable poster
 - [x] Screenshots in docs/screenshots/, money flow chart verified with real data, demo data removed. Tax rates confirmed by user (2026-10-13).
 - [x] Live on Vercel: https://coin-flow-theta.vercel.app (auto-deploys from GitHub main). Poster QR set by user.
+
+## Submission #2 (evaluator feedback 2026-11-10, scored 6/10)
+- [x] Tax engine fixed + verified (employee social 0%, 9% CNAM deducted pre-tax, 29 700 exemption, 360 000 limit, 9 900 dependants); tests updated (27)
+- [x] Sankey margins, scroll offset under sticky header; payslip + summary screenshots replaced
+- [x] AI_LOG records the missed tax check honestly
+- [ ] Decide scope for research core (hypothesis + algorithms + benchmark), economic analysis, MoldSEF docs, A0 poster, 3-min RO/EN pitch

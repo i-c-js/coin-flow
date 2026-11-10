@@ -14,7 +14,7 @@ Teens get pocket money and first salaries, but nobody teaches how to manage them
 1. Home: the big weekly number → press **Add expense** → 25 lei, Food → the number updates.
 2. Goals: show the jar, press **Add money**, watch it fill, read the estimate out loud.
 3. Summary: the bar chart and the **money flow** diagram.
-4. Payslip: type 10 000 → "you take home 7 780 lei", explain one tax.
+4. Payslip: type 10 000 → "you take home 8 305 lei", explain one tax.
 5. Switch the language to Russian and back.
 
 **4. How it's built (1 min)**

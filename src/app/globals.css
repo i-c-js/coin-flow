@@ -23,6 +23,11 @@
   --radius-pill: 999px;
 }
 
+/* Keep headings visible below the sticky header when the page scrolls to them */
+html {
+  scroll-padding-top: 5rem;
+}
+
 /* Clear keyboard focus ring on every button, link and input */
 :focus-visible {
   outline: 3px solid var(--color-wave);

@@ -54,11 +54,13 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 | Quiz answers clicked quickly overwrote each other | Automated browser test | Changed to a safer way of updating React state |
 | Browser `prompt()`/`confirm()` pop-ups looked out of place | Review against the UI/UX criterion | Replaced with the app's own dialogs |
 | Tailwind v4 didn't accept the old `@layer components` style | Build error | Rewrote the shared styles as `@utility` |
+| **Wrong Moldovan tax rules in the payslip.** Claude Code wrote them from memory and marked them "must be checked"; my check didn't catch it | Evaluator feedback on submission #1 | Verified against CNAS and sfs.md: employee social 0% (since 2021), 9% medical deducted before tax, 29 700 lei exemption with the 360 000 lei limit, 9 900 lei per dependant. Added tests with a cross-checked example |
+| Sticky header covered headings, Sankey labels touched the card edge | Evaluator feedback | Scroll offset for the header and more space around the chart |
 
 ## What I checked myself
 
 - [x] I read `docs/HOW_IT_WORKS.md` and can explain each part of the code
-- [x] I checked the tax rates in `src/config/moldova-tax.ts` against official sources (13 Oct 2026). Source I used: the State Tax Service website, [sfs.md](https://www.sfs.md)
+- [x] I checked the tax rates in `src/config/moldova-tax.ts`. **My first check (13 Oct 2026) missed two errors** that the evaluator found: the employee 6% social contribution (abolished in 2021) and the personal exemption (29 700 lei, not 30 000). Re-verified on 10 Nov 2026 against CNAS, sfs.md / Codul Fiscal and public 2026 salary calculators (10 000 lei gross → 8 305 lei net); the formula now has unit tests for these cases.
 - [x] I checked the lesson texts and quiz answers in all three languages
 - [x] I tried every feature on my phone and on a computer
 - [x] I ran `npm test` and saw all 25 tests pass (13 Oct 2026)

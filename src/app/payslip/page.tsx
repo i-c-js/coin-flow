@@ -11,11 +11,11 @@ import Wave from "@/components/Wave";
 export default function PayslipPage() {
   const { t } = useLanguage();
   const [gross, setGross] = useState("10000");
-  const slip = calculatePayslip(leiToBani(Number(gross.replace(",", ".")) || 0));
+  const [dependants, setDependants] = useState(0);
+  const slip = calculatePayslip(leiToBani(Number(gross.replace(",", ".")) || 0), dependants);
   const percent = (rate: number) => `${Math.round(rate * 100)}%`;
 
   const deductions = [
-    { label: t("payslip.social"), rate: percent(MOLDOVA_TAX.socialRateEmployee), bani: slip.socialBani, text: t("payslip.socialText") },
     { label: t("payslip.medical"), rate: percent(MOLDOVA_TAX.medicalRateEmployee), bani: slip.medicalBani, text: t("payslip.medicalText") },
     { label: t("payslip.incomeTax"), rate: percent(MOLDOVA_TAX.incomeTaxRate), bani: slip.incomeTaxBani, text: t("payslip.incomeTaxText") },
   ];
@@ -27,15 +27,29 @@ export default function PayslipPage() {
         <p className="mt-1 text-ink-soft">{t("payslip.intro")}</p>
       </div>
 
-      <div className="card">
-        <label className="label" htmlFor="gross">{t("payslip.gross")}</label>
-        <input
-          id="gross"
-          className="input big-number text-3xl"
-          inputMode="decimal"
-          value={gross}
-          onChange={(e) => setGross(e.target.value.replace(/[^0-9.,]/g, ""))}
-        />
+      <div className="card grid gap-4 sm:grid-cols-[1fr_auto]">
+        <div>
+          <label className="label" htmlFor="gross">{t("payslip.gross")}</label>
+          <input
+            id="gross"
+            className="input big-number text-3xl"
+            inputMode="decimal"
+            value={gross}
+            onChange={(e) => setGross(e.target.value.replace(/[^0-9.,]/g, ""))}
+          />
+        </div>
+        <div>
+          <label className="label" htmlFor="dependants">{t("payslip.dependants")}</label>
+          <input
+            id="dependants"
+            type="number"
+            min={0}
+            max={10}
+            className="input big-number text-3xl sm:w-28"
+            value={dependants}
+            onChange={(e) => setDependants(Math.max(0, Math.min(10, Number(e.target.value) || 0)))}
+          />
+        </div>
       </div>
 
       <div className="relative overflow-hidden rounded-card bg-flow p-6 pb-14 text-white">
@@ -62,7 +76,7 @@ export default function PayslipPage() {
 
         <div className="card text-sm">
           <p className="font-bold">{t("payslip.exemption")}: {formatBani(slip.exemptionBani)} {t("common.lei")}</p>
-          <p className="text-ink-soft">{t("payslip.exemptionText")}</p>
+          <p className="text-ink-soft">{slip.exemptionBani > 0 ? t("payslip.exemptionText") : t("payslip.noExemption")}</p>
           <p className="mt-2 font-bold">{t("payslip.taxable")}: {formatBani(slip.taxableBani)} {t("common.lei")}</p>
         </div>
 
@@ -71,6 +85,7 @@ export default function PayslipPage() {
             {t("payslip.employer")} ({percent(MOLDOVA_TAX.socialRateEmployer)}): {formatBani(slip.employerSocialBani)} {t("common.lei")}
           </p>
           <p className="text-ink-soft">{t("payslip.employerText")}</p>
+          <p className="mt-2 font-bold">{t("payslip.totalCost")}: {formatBani(slip.grossBani + slip.employerSocialBani)} {t("common.lei")}</p>
         </div>
       </section>
 

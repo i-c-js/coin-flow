@@ -54,10 +54,12 @@ Example: 1 200 lei goal, 400 saved, 150/month → 800 ÷ 150 = 5.33 → **6 mont
 **What if** (`whatIfTotals`): daily × 30, × 365, × 365 × 5. 25 lei/day → 750 / 9 125 / 45 625 lei.
 
 **Payslip** (`calculatePayslip`), for 10 000 lei gross:
-- social insurance 6% = 600, medical insurance 9% = 900
-- taxable = 10 000 − 600 − 900 − 2 500 (monthly personal exemption) = 6 000
-- income tax 12% of 6 000 = 720
-- net = 10 000 − 600 − 900 − 720 = **7 780 lei**
+- social insurance: **0%** for the employee (abolished in 2021; the employer pays 24% on top)
+- medical insurance 9% = 900
+- taxable = 10 000 − 900 − 2 475 (monthly personal exemption, 29 700 / 12) = 6 625
+- income tax 12% of 6 625 = 795
+- net = 10 000 − 900 − 795 = **8 305 lei**
+- no exemption if yearly taxable income is 360 000 lei or more; +825 lei/month exemption per dependant
 
 **Currency** (`mdlToForeign`, `foreignToMdl`): the BNM rate says how many lei 1 euro costs. Lei → euro: divide. Euro → lei: multiply. Rounded to 2 decimals.
 
