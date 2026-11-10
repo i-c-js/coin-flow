@@ -104,6 +104,6 @@ Files: `src/lib/forecast/`. Read them in this order:
 5. `stats.ts`: the Wilcoxon test that tells whether a difference is real or luck.
 6. `weekly.ts`: how the app turns your transactions into weekly totals and uses the winning method (SMA).
 
-Try it: run `npm run benchmark` and compare the output with `research/RESULTS.md`. Then change `sma(weeks, 4)` to `sma(weeks, 6)` in `methods.ts`, run it again and see how the error changes.
+Try it: run `npm run benchmark` and compare the output with `research/RESULTS.md`. Then change `window = 4` to `window = 6` in the `sma` function in `methods.ts`, run it again and see how the error changes (change it back afterwards).
 
 The questions the jury is likely to ask about the research are in `docs/PRESENTATION.md`.
