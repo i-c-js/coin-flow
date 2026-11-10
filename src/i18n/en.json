@@ -129,7 +129,9 @@
     "summary": "Weekly summary",
     "summaryText": "Where your money went this week.",
     "settings": "Settings",
-    "settingsText": "Language and your data."
+    "settingsText": "Language and your data.",
+    "research": "Research",
+    "researchText": "Which algorithm predicts spending best."
   },
   "whatIf": {
     "title": "What if...",
@@ -215,5 +217,45 @@
     "leftover": "Left over",
     "earlier": "Earlier money",
     "empty": "Add some income or expenses this month to see your money flow."
+  },
+  "forecast": {
+    "title": "Forecast for this week",
+    "notEnough": "Add expenses for at least 2 weeks to get a forecast.",
+    "soFar": "So far: {spent} lei.",
+    "over": "You are above the forecast.",
+    "under": "You are below the forecast.",
+    "how": "How is the forecast calculated?"
+  },
+  "research": {
+    "kicker": "Research",
+    "title": "Which algorithm predicts teen spending best?",
+    "intro": "CoinFlow forecasts how much you will spend this week. Before choosing the method, we tested five classic forecasting algorithms in a reproducible experiment.",
+    "questionTitle": "Question and method",
+    "question": "Can a simple algorithm that runs on the phone predict next week's spending accurately, and does modelling the trend (Holt's method) beat a simple moving average?",
+    "design": "{ledgers} synthetic teen ledgers (26 weeks each, 5 spending profiles), rolling-origin evaluation, {forecasts} forecasts per method, Wilcoxon signed-rank test (α = 0.05).",
+    "supported": "supported",
+    "notSupported": "not supported",
+    "h1": "Holt's trend method is more accurate than the 4-week moving average. Result: it was 24.5 % less accurate (p < 0.001), even on ledgers with a trend.",
+    "h2": "Every smoothing method beats the naive “same as last week” forecast. Result: true for all three (p < 0.01).",
+    "chartTitle": "Average error per method",
+    "chartSubtitle": "Mean absolute error in lei per week (lower is better). DAMPED was added after the main experiment.",
+    "leiPerWeek": "lei/week",
+    "profileTitle": "Error by spending profile (lei/week)",
+    "profile": "Profile",
+    "tableNote": "Bold = lowest error for that profile.",
+    "profiles": {
+      "stable": "Stable",
+      "rising": "Rising trend",
+      "falling": "Falling trend",
+      "allowance": "Monthly allowance",
+      "shocks": "Impulse purchases"
+    },
+    "sensitivityTitle": "When would trend models win?",
+    "sensitivitySubtitle": "Rising-trend ledgers with less and less day-to-day noise. The gap shrinks, but the moving average stays best.",
+    "noiseAxis": "daily noise (σ)",
+    "conclusionTitle": "Conclusion",
+    "conclusion": "On short, noisy teen spending data, simpler is better: the 4-week moving average had the lowest error, and the more complex trend methods overreacted to random spikes. Damping the trend (Gardner & McKenzie) reduced Holt's error by about 10 % but did not beat the moving average.",
+    "inApp": "That is why CoinFlow's weekly forecast uses the 4-week moving average.",
+    "reproduce": "Code and data to repeat the experiment"
   }
 }

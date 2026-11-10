@@ -129,7 +129,9 @@
     "summary": "Rezumat săptămânal",
     "summaryText": "Pe ce s-au dus banii săptămâna asta.",
     "settings": "Setări",
-    "settingsText": "Limba și datele tale."
+    "settingsText": "Limba și datele tale.",
+    "research": "Cercetare",
+    "researchText": "Ce algoritm prezice cel mai bine cheltuielile."
   },
   "whatIf": {
     "title": "Ce-ar fi dacă...",
@@ -215,5 +217,45 @@
     "leftover": "Rămas",
     "earlier": "Bani de mai înainte",
     "empty": "Adaugă venituri sau cheltuieli luna aceasta ca să vezi cum curg banii."
+  },
+  "forecast": {
+    "title": "Prognoză pentru săptămâna asta",
+    "notEnough": "Adaugă cheltuieli cel puțin 2 săptămâni ca să primești o prognoză.",
+    "soFar": "Până acum: {spent} lei.",
+    "over": "Ai depășit prognoza.",
+    "under": "Ești sub prognoză.",
+    "how": "Cum calculăm prognoza?"
+  },
+  "research": {
+    "kicker": "Cercetare",
+    "title": "Ce algoritm prezice cel mai bine cheltuielile adolescenților?",
+    "intro": "CoinFlow prezice cât vei cheltui săptămâna aceasta. Înainte de a alege metoda, am testat cinci algoritmi clasici de prognoză într-un experiment reproductibil.",
+    "questionTitle": "Întrebare și metodă",
+    "question": "Poate un algoritm simplu, care rulează pe telefon, să prezică corect cheltuielile săptămânii viitoare? Și este modelarea tendinței (metoda Holt) mai bună decât o medie mobilă simplă?",
+    "design": "{ledgers} registre sintetice de cheltuieli (câte 26 de săptămâni, 5 profiluri), evaluare cu origine glisantă, {forecasts} prognoze pentru fiecare metodă, testul Wilcoxon (α = 0,05).",
+    "supported": "confirmată",
+    "notSupported": "infirmată",
+    "h1": "Metoda Holt (cu tendință) este mai precisă decât media mobilă pe 4 săptămâni. Rezultat: a fost cu 24,5 % mai puțin precisă (p < 0,001), chiar și pe registrele cu tendință.",
+    "h2": "Fiecare metodă de netezire este mai bună decât prognoza naivă „ca săptămâna trecută”. Rezultat: adevărat pentru toate trei (p < 0,01).",
+    "chartTitle": "Eroarea medie pe metodă",
+    "chartSubtitle": "Eroarea absolută medie în lei pe săptămână (mai mic = mai bine). DAMPED a fost adăugată după experimentul principal.",
+    "leiPerWeek": "lei/săpt.",
+    "profileTitle": "Eroarea pe profil de cheltuieli (lei/săpt.)",
+    "profile": "Profil",
+    "tableNote": "Îngroșat = cea mai mică eroare pentru profilul respectiv.",
+    "profiles": {
+      "stable": "Stabil",
+      "rising": "Tendință în creștere",
+      "falling": "Tendință în scădere",
+      "allowance": "Bani de buzunar lunar",
+      "shocks": "Cumpărături impulsive"
+    },
+    "sensitivityTitle": "Când ar câștiga modelele cu tendință?",
+    "sensitivitySubtitle": "Registre cu tendință de creștere și tot mai puțin zgomot zilnic. Diferența scade, dar media mobilă rămâne cea mai bună.",
+    "noiseAxis": "zgomot zilnic (σ)",
+    "conclusionTitle": "Concluzie",
+    "conclusion": "Pe date scurte și zgomotoase ale adolescenților, mai simplu înseamnă mai bine: media mobilă pe 4 săptămâni a avut cea mai mică eroare, iar metodele mai complexe cu tendință au reacționat exagerat la vârfuri întâmplătoare. Amortizarea tendinței (Gardner & McKenzie) a redus eroarea metodei Holt cu circa 10 %, dar nu a întrecut media mobilă.",
+    "inApp": "De aceea prognoza săptămânală din CoinFlow folosește media mobilă pe 4 săptămâni.",
+    "reproduce": "Codul și datele pentru a repeta experimentul"
   }
 }

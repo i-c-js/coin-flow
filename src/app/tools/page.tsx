@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { TrendingUp, Receipt, ArrowLeftRight, ChartColumn, Settings, ChevronRight } from "lucide-react";
+import { TrendingUp, Receipt, ArrowLeftRight, ChartColumn, Settings, ChevronRight, FlaskConical } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 const TOOLS = [
@@ -9,6 +9,7 @@ const TOOLS = [
   { href: "/payslip", key: "payslip", icon: Receipt, color: "bg-wave" },
   { href: "/converter", key: "converter", icon: ArrowLeftRight, color: "bg-foam" },
   { href: "/summary", key: "summary", icon: ChartColumn, color: "bg-coral/20" },
+  { href: "/research", key: "research", icon: FlaskConical, color: "bg-foam" },
   { href: "/settings", key: "settings", icon: Settings, color: "bg-mist" },
 ];
 

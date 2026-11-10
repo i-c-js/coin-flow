@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, PiggyBank } from "lucide-react";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight, PiggyBank, TrendingUp } from "lucide-react";
 import AuthGuard from "@/components/AuthGuard";
 import EmptyState from "@/components/EmptyState";
 import CategoryChart from "@/components/CategoryChart";
 import MoneyFlowChart from "@/components/MoneyFlowChart";
 import { buildMoneyFlow } from "@/lib/flow";
+import { forecastNextWeekBani, weeklyExpenseTotals } from "@/lib/forecast/weekly";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { supabase } from "@/lib/supabase";
 import { addDays, formatBani, startOfWeek, toDateString } from "@/lib/money";
@@ -22,6 +24,7 @@ function Summary() {
   const [weekOffset, setWeekOffset] = useState(0); // 0 = this week, -1 = last week...
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [monthTx, setMonthTx] = useState<Transaction[]>([]);
+  const [pastWeeks, setPastWeeks] = useState<number[]>([]);
 
   const monday = addDays(startOfWeek(new Date()), weekOffset * 7);
   const sunday = addDays(monday, 6);
@@ -49,6 +52,19 @@ function Summary() {
       .then(({ data }) => setMonthTx(data ?? []));
   }, []);
 
+  // The 4 full weeks before this one, for the spending forecast
+  useEffect(() => {
+    const thisMonday = startOfWeek(new Date());
+    supabase
+      .from("transactions")
+      .select("*")
+      .eq("type", "expense")
+      .gte("date", toDateString(addDays(thisMonday, -28)))
+      .lt("date", toDateString(thisMonday))
+      .then(({ data }) => setPastWeeks(weeklyExpenseTotals(data ?? [], thisMonday, 4)));
+  }, []);
+
+  const forecast = forecastNextWeekBani(pastWeeks);
   const flow = buildMoneyFlow(monthTx);
   const monthName = new Date().toLocaleDateString(lang, { month: "long", year: "numeric" });
   const total = sumByType(transactions, "expense");
@@ -68,6 +84,39 @@ function Summary() {
           <ChevronRight />
         </button>
       </div>
+
+      {weekOffset === 0 && (
+        <div className="card flex items-start gap-4">
+          <span className="rounded-2xl bg-sun p-3 text-ink">
+            <TrendingUp size={24} />
+          </span>
+          <div className="flex-1">
+            <p className="text-ink-soft">{t("forecast.title")}</p>
+            {forecast === null ? (
+              <p className="mt-1">{t("forecast.notEnough")}</p>
+            ) : (
+              <>
+                <p className="big-number text-3xl text-flow">
+                  ~{formatBani(forecast)} <span className="text-base">{t("common.lei")}</span>
+                </p>
+                <p className="mt-1 text-sm">
+                  {t("forecast.soFar", { spent: formatBani(total) })}{" "}
+                  <span className={total > forecast ? "font-bold text-coral" : "font-bold text-leaf"}>
+                    {total > forecast ? t("forecast.over") : t("forecast.under")}
+                  </span>
+                </p>
+                <div className="mt-2 h-2.5 overflow-hidden rounded-pill bg-foam">
+                  <div
+                    className={`h-full rounded-pill ${total > forecast ? "bg-coral" : "bg-wave"}`}
+                    style={{ width: `${Math.min(100, forecast > 0 ? (100 * total) / forecast : 0)}%` }}
+                  />
+                </div>
+              </>
+            )}
+            <Link href="/research" className="mt-2 inline-block text-sm font-semibold text-flow underline">{t("forecast.how")}</Link>
+          </div>
+        </div>
+      )}
 
       {byCategory.length === 0 ? (
         <EmptyState image="/illustrations/calm-water.svg" icon={PiggyBank} title={t("summary.emptyTitle")} text={t("summary.emptyText")} />

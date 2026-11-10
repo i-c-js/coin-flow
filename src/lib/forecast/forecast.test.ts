@@ -86,3 +86,20 @@ describe("synthetic data", () => {
     expect(lastMonth).toBeGreaterThan(firstMonth);
   });
 });
+
+describe("in-app weekly forecast", async () => {
+  const { weeklyExpenseTotals, forecastNextWeekBani } = await import("./weekly");
+  const tx = (date: string, lei: number, type: "income" | "expense" = "expense") => ({
+    id: date + lei, type, category: "food", note: null, date, amount_bani: lei * 100,
+  });
+  const monday = new Date(2026, 10, 9); // Monday 9 Nov 2026
+
+  it("adds expenses into the right weeks, oldest first, ignoring income", () => {
+    const list = [tx("2026-11-02", 50), tx("2026-11-08", 30), tx("2026-10-26", 100), tx("2026-11-03", 999, "income"), tx("2026-11-09", 70)];
+    expect(weeklyExpenseTotals(list, monday, 3)).toEqual([0, 10000, 8000]);
+  });
+  it("forecasts the 4-week average, or nothing without enough history", () => {
+    expect(forecastNextWeekBani([10000, 20000, 30000, 40000])).toBe(25000);
+    expect(forecastNextWeekBani([0, 0, 0, 5000])).toBeNull();
+  });
+});
