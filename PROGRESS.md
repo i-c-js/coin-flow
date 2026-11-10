@@ -30,4 +30,10 @@
 - [x] Tax engine fixed + verified (employee social 0%, 9% CNAM deducted pre-tax, 29 700 exemption, 360 000 limit, 9 900 dependants); tests updated (27)
 - [x] Sankey margins, scroll offset under sticky header; payslip + summary screenshots replaced
 - [x] AI_LOG records the missed tax check honestly
-- [ ] Decide scope for research core (hypothesis + algorithms + benchmark), economic analysis, MoldSEF docs, A0 poster, 3-min RO/EN pitch
+- [x] Research core: pre-registered hypothesis, 5 forecasting methods, 150 synthetic ledgers, Wilcoxon, sensitivity (H1 rejected, H2 supported, SMA best)
+- [x] App uses SMA forecast (summary page) + public /research page
+- [x] Next.js security upgrade 16.4.6
+- [x] Economic analysis, research README + bibliography, dated logbook, figures
+- [x] Abstract Anexa 2 + graphical annex (RO, EN docx; 2+1 pages, TNR 12, <1 MB)
+- [x] A0 poster (/poster-a0.html), 3-min RO/EN pitch + Q&A prep (docs/PRESENTATION.md)
+- [ ] User: fill name/school/supervisor in abstracts, logbook, A0 poster; sign logbook; practise live code changes

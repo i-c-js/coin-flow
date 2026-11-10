@@ -41,6 +41,26 @@ CoinFlow is made for this age group: simple, visual, in the three languages spok
   <img src="docs/screenshots/lessons.png" alt="Lessons" width="49%">
 </p>
 
+## Research: which algorithm predicts teen spending best?
+
+CoinFlow's weekly forecast is chosen by an experiment, not by guessing. Five forecasting methods (naive, 4-week moving average, simple exponential smoothing, Holt's trend method, and damped trend) were compared on 150 reproducible synthetic teen ledgers: 2 700 forecasts per method, with a Wilcoxon signed-rank test.
+
+- **H1** (Holt beats the moving average): **not supported**. Holt was 24.5 % worse (p < 0.001).
+- **H2** (smoothing beats "same as last week"): **supported**.
+- The **4-week moving average** was the most accurate (174 lei/week mean absolute error), so the app uses it.
+
+Details: [`research/`](research/README.md) · results page in the app: `/research` · run it yourself: `npm run benchmark`.
+
+| Document | File |
+|---|---|
+| Hypothesis (registered first) | [`research/HYPOTHESIS.md`](research/HYPOTHESIS.md) |
+| Results | [`research/RESULTS.md`](research/RESULTS.md) |
+| Economic analysis | [`research/ECONOMIC_ANALYSIS.md`](research/ECONOMIC_ANALYSIS.md) |
+| Laboratory logbook (Anexa 3) | [`research/LOGBOOK.md`](research/LOGBOOK.md) |
+| Abstract (Anexa 2) + graphical annex | [`docs/moldsef/`](docs/moldsef/) (RO and EN, .docx) |
+| A0 poster | `/poster-a0.html` in the app |
+| 3-minute pitch (RO + EN) and Q&A | [`docs/PRESENTATION.md`](docs/PRESENTATION.md) |
+
 ## How to run it
 
 You need [Node.js](https://nodejs.org) 20+ and a free [Supabase](https://supabase.com) project.
@@ -62,7 +82,9 @@ You need [Node.js](https://nodejs.org) 20+ and a free [Supabase](https://supabas
 | Command | What it does |
 |---|---|
 | `npm run dev` | Start the app for development |
-| `npm test` | Run the 25 unit tests |
+| `npm test` | Run the 42 unit tests |
+| `npm run benchmark` | Repeat the forecasting experiment (about 1 s) |
+| `npm run figures` | Redraw the research figures |
 | `npm run lint` | Check the code style |
 | `npm run build` | Build the app for production |
 
@@ -140,7 +162,7 @@ public/poster.html    printable stand poster with QR code
 
 ## Quality
 
-- **Tests:** 25 Vitest unit tests for every money calculation (`src/lib/*.test.ts`).
+- **Tests:** 42 Vitest unit tests for every money calculation and forecasting method (`src/lib/**/*.test.ts`).
 - **CI:** GitHub Actions runs lint, tests and a production build on every push (`.github/workflows/ci.yml`).
 - **Accessibility:** keyboard focus ring, "skip to content" link, labelled form fields, dialogs close with Escape, works on phones (bottom navigation) and computers.
 - **Privacy:** no tracking, no ads, no third-party scripts. Data is only in the user's own Supabase rows and can be deleted from Settings.

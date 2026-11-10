@@ -80,7 +80,7 @@ Example: 1 200 lei goal, 400 saved, 150/month → 800 ÷ 150 = 5.33 → **6 mont
 
 - **Why Supabase and not your own server?** It's free, gives a real database and login, and RLS keeps data safe without writing a backend.
 - **What if the bank's website is down?** The API route catches the error and returns sample rates with `sample: true`; the page shows a "sample rates" warning.
-- **How do you know the calculations are right?** 25 unit tests with examples calculated by hand, and GitHub runs them on every push.
+- **How do you know the calculations are right?** 42 unit tests with examples calculated by hand, and GitHub runs them on every push.
 - **What would you add next?** A monthly budget limit with a warning, reminders, sharing a goal with a friend, an installable phone app (PWA).
 - **What did AI do and what did you do?** See `AI_LOG.md`. Be honest and specific.
 
@@ -92,3 +92,18 @@ Try making these small changes yourself before presenting. If you can do them, y
 2. Change the coffee price in the what-if simulator (`src/app/what-if/page.tsx`).
 3. Add a 4th quiz question to a lesson (`src/content/lessons.ts`).
 4. Write one more test in `src/lib/calculations.test.ts` and run `npm test`.
+
+## 8. The research module (forecasting)
+
+Files: `src/lib/forecast/`. Read them in this order:
+
+1. `methods.ts`: the 5 forecasting methods. Each is a short loop over the weekly totals. Start with `naive` and `sma`, then `ses` (a running average where recent weeks count more), then `holt` (level + trend).
+2. `metrics.ts`: how wrong a forecast is (MAE = the average size of the mistake).
+3. `evaluate.ts`: the "rolling origin". Stand at week 8, predict week 9, compare, move forward one week.
+4. `synthetic.ts`: how the 150 test ledgers are generated (fixed seeds, so the result is always the same).
+5. `stats.ts`: the Wilcoxon test that tells whether a difference is real or luck.
+6. `weekly.ts`: how the app turns your transactions into weekly totals and uses the winning method (SMA).
+
+Try it: run `npm run benchmark` and compare the output with `research/RESULTS.md`. Then change `sma(weeks, 4)` to `sma(weeks, 6)` in `methods.ts`, run it again and see how the error changes.
+
+The questions the jury is likely to ask about the research are in `docs/PRESENTATION.md`.

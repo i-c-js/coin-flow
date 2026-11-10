@@ -40,6 +40,21 @@ These are my main requests in order (shortened). The full first prompt is in [`C
 9. *When I create an account, take me straight to the home page.*
 10. *Write a short description for my teacher, including the UN goal.* (then: *shorter and more human*)
 11. *Update the project so it gets 5 points on each criterion of the grading table.*
+12. *I got 6/10 [evaluator feedback pasted]. I need 10/10.* Then my choices: research direction **A, algorithm benchmark**; Claude writes the algorithm code; documents in **Romanian + English**.
+
+## Submission #2: research work (10 Nov 2026)
+
+| Part | Who did it |
+|---|---|
+| Choosing the research direction (forecast benchmark), the language of the documents, accepting the evaluator's roadmap | me |
+| Research question, hypotheses H1/H2 and the experiment design (`research/HYPOTHESIS.md`) | drafted by Claude Code from the evaluator's roadmap, committed before any experiment was run; I agreed to it |
+| Forecasting methods, synthetic data generator, benchmark, statistics, figures (`src/lib/forecast/`, `scripts/`) | written by Claude Code |
+| Checking that the results are not a bug | 13 tests with known answers, written by Claude Code; I ran them (`npm test`) |
+| Tax rules re-verification | researched by Claude Code on CNAS / sfs.md / public calculators; cross-checked example 10 000 → 8 305 lei |
+| Economic analysis, abstract (Anexa 2), logbook (Anexa 3), A0 poster, pitch | drafted by Claude Code from the real results and public sources; I review, sign and present them |
+| Understanding the code and defending it | me: see `docs/HOW_IT_WORKS.md` and the Q&A table in `docs/PRESENTATION.md` |
+
+**Validation steps:** the hypothesis was committed to git (23:15) before the benchmark ran (23:18), so the order can be checked. H1 was rejected and is reported as rejected, not tuned until it passed. The methods added afterwards (damped trend, sensitivity analysis) are labelled **exploratory**. All results can be reproduced with `npm run benchmark`.
 
 ## Problems found and how they were fixed
 
@@ -56,6 +71,8 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 | Tailwind v4 didn't accept the old `@layer components` style | Build error | Rewrote the shared styles as `@utility` |
 | **Wrong Moldovan tax rules in the payslip.** Claude Code wrote them from memory and marked them "must be checked"; my check didn't catch it | Evaluator feedback on submission #1 | Verified against CNAS and sfs.md: employee social 0% (since 2021), 9% medical deducted before tax, 29 700 lei exemption with the 360 000 lei limit, 9 900 lei per dependant. Added tests with a cross-checked example |
 | Sticky header covered headings, Sankey labels touched the card edge | Evaluator feedback | Scroll offset for the header and more space around the chart |
+| Next.js 16.4.0 had critical security advisories | Build failed with a security warning | Checked with `npm audit` (3 advisories), upgraded to 16.4.6, 0 vulnerabilities |
+| Research charts drew no bars or lines in a background tab | Visual check in the browser | Turned off chart animation |
 
 ## What I checked myself
 
@@ -68,7 +85,7 @@ AI output isn't automatically correct. These problems came up and were fixed aft
 
 ## Responsibility, licences and privacy
 
-- **Credit:** AI tools are credited here and in the README. The ideas, the spec, the testing and the decisions are mine; most of the code was written by Claude Code following my instructions.
+- **Credit:** AI tools are credited here, in the README and on the poster. The idea, the spec, the choices and the testing are mine; the code (including the research module) was written by Claude Code following my instructions.
 - **Human review:** every AI change was built and tested; calculations have unit tests with hand-checked examples; tax rates are marked as "must be checked against official sources".
 - **Licences:** all libraries are open source (MIT/ISC/Apache), the fonts use the SIL Open Font License, the exchange rates are public data from the National Bank of Moldova. The logo and illustrations were drawn as SVG code by Claude Code for this project; no copyrighted images were used.
 - **Privacy:** the app has no tracking and no ads. Each user's data is protected by Row Level Security and can be deleted from Settings. No personal data was given to the AI tools: test data was made up, and secret keys were never pasted into a prompt.
