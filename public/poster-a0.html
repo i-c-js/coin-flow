@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoinFlow A0 poster</title>
+<!-- Scientific poster, A0 portrait (841 × 1189 mm). Open in Chrome → Print → Save as PDF,
+     paper size A0 (or "Custom 841 × 1189 mm"), margins None, Background graphics ON. -->
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700&family=Unbounded:wght@700;800&display=swap&subset=latin-ext,cyrillic" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+  :root { --ink:#0f2233; --soft:#4a5d6b; --mist:#eef5f4; --flow:#0b6e6e; --wave:#3cc3b0; --foam:#d8f3ee; --sun:#ffc845; --coral:#f2674a; --line:#d6e4e2; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #c9d3d6; font-family: Onest, sans-serif; color: var(--ink); }
+  .controls { position: sticky; top: 0; z-index: 2; display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 16px; background: #fff; border-bottom: 1px solid var(--line); }
+  .controls input { flex: 1; min-width: 220px; padding: 8px 12px; border-radius: 999px; border: 1px solid #aab; font: inherit; }
+  .controls button { padding: 8px 14px; border-radius: 999px; border: 0; background: var(--flow); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+  .controls button.alt { background: #eef5f4; color: var(--ink); }
+  .viewport { padding: 24px 16px; overflow: hidden; }
+  /* The poster is laid out at real size in mm, then scaled down to fit the screen. */
+  .poster { width: 841mm; height: 1189mm; background: var(--mist); transform-origin: top left; padding: 24mm 28mm; display: flex; flex-direction: column; gap: 10mm; overflow: hidden; }
+  .poster > * { flex-shrink: 0; }
+  header { display: grid; grid-template-columns: 1fr auto; gap: 16mm; align-items: center; background: var(--flow); color: #fff; border-radius: 14mm; padding: 18mm 22mm 24mm; position: relative; overflow: hidden; }
+  header .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 14mm; width: 100%; }
+  .brand { display: flex; align-items: center; gap: 8mm; font-family: Unbounded; font-weight: 800; font-size: 22mm; }
+  .brand img { width: 26mm; height: 26mm; }
+  h1 { font-family: Unbounded; font-weight: 800; font-size: 17mm; line-height: 1.12; margin: 8mm 0 6mm; max-width: 560mm; }
+  .authors { font-size: 8mm; color: var(--foam); }
+  .qr { background: #fff; border-radius: 8mm; padding: 6mm; text-align: center; color: var(--ink); position: relative; z-index: 1; }
+  .qr svg { width: 95mm; height: 95mm; display: block; }
+  .qr b { display: block; font-size: 7mm; margin-top: 3mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm; }
+  .card { background: #fff; border: 0.6mm solid var(--line); border-radius: 10mm; padding: 10mm 12mm; }
+  h2 { font-family: Unbounded; font-size: 10.5mm; margin: 0 0 6mm; display: flex; align-items: center; gap: 4mm; }
+  h2 .n { display: inline-grid; place-items: center; width: 13mm; height: 13mm; border-radius: 50%; background: var(--sun); font-size: 7mm; }
+  p, li { font-size: 7.2mm; line-height: 1.34; margin: 0 0 3.5mm; }
+  ul { margin: 0; padding-left: 9mm; }
+  .hyp { border-left: 3mm solid var(--flow); padding: 4mm 6mm; background: var(--foam); border-radius: 0 6mm 6mm 0; margin-bottom: 4mm; }
+  .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-bottom: 6mm; }
+  .verdict div { border-radius: 8mm; padding: 6mm 8mm; font-size: 7.6mm; }
+  .no { background: #fde3dc; border: 0.8mm solid var(--coral); }
+  .yes { background: #d9f2e4; border: 0.8mm solid #1e9e5a; }
+  .verdict b { font-family: Unbounded; font-size: 8.5mm; display: block; }
+  figure { margin: 0; }
+  figure img { width: 100%; max-height: 165mm; object-fit: contain; display: block; border-radius: 4mm; }
+  figcaption { font-size: 6.4mm; color: var(--soft); margin-top: 2mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 7mm; }
+  th, td { padding: 2.6mm 3mm; border-bottom: 0.4mm solid var(--line); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--soft); font-weight: 600; }
+  .best { color: var(--flow); font-weight: 700; }
+  .big { font-family: Unbounded; font-weight: 800; font-size: 16mm; color: var(--flow); line-height: 1; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; margin-bottom: 6mm; }
+  .stats div { background: var(--foam); border-radius: 8mm; padding: 6mm; }
+  .stats small { display: block; font-size: 6.4mm; color: var(--soft); margin-top: 2mm; }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .shots img { width: 100%; height: 150mm; object-fit: cover; object-position: top; border-radius: 6mm; border: 0.6mm solid var(--line); }
+  .conclusion { background: var(--flow); color: #fff; }
+  .conclusion p { font-size: 8.4mm; }
+  .refs li { font-size: 5.6mm; margin-bottom: 1.5mm; }
+  footer { font-size: 5.6mm; color: var(--soft); display: flex; justify-content: space-between; gap: 10mm; }
+  @media print {
+    @page { size: 841mm 1189mm; margin: 0; }
+    body { background: none; }
+    .controls { display: none; }
+    .viewport { padding: 0; }
+    .poster { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="controls">
+  <input id="url" placeholder="Live link for the QR code, e.g. https://coin-flow-theta.vercel.app">
+  <button class="alt" data-lang="ro">RO</button>
+  <button class="alt" data-lang="en">EN</button>
+  <button onclick="window.print()">Print / PDF (A0)</button>
+</div>
+
+<div class="viewport"><div class="poster" id="poster">
+  <header>
+    <div>
+      <div class="brand"><img src="/logo.svg" alt="">CoinFlow</div>
+      <h1 data-t="title"></h1>
+      <div class="authors" data-t="authors"></div>
+    </div>
+    <div class="qr"><div id="qr"></div><b data-t="scan"></b></div>
+    <svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M0 20 C 50 0, 100 40, 150 20 S 250 0, 300 20 S 380 40, 400 20 V40 H0 Z" fill="#3cc3b0"/></svg>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <h2><span class="n">1</span><span data-t="h_problem"></span></h2>
+      <p data-t="problem"></p>
+      <div class="stats">
+        <div><span class="big">272M</span><small data-t="stat_scam"></small></div>
+        <div><span class="big">0</span><small data-t="stat_free"></small></div>
+        <div><span class="big">3</span><small data-t="stat_lang"></small></div>
+      </div>
+      <h2><span class="n">2</span><span data-t="h_hyp"></span></h2>
+      <div class="hyp"><p data-t="h1"></p></div>
+      <div class="hyp"><p data-t="h2"></p></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">3</span><span data-t="h_method"></span></h2>
+      <ul data-list="method"></ul>
+      <figure><img src="/poster-assets/architecture.svg" alt=""><figcaption data-t="cap_arch"></figcaption></figure>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2><span class="n">4</span><span data-t="h_results"></span></h2>
+    <div class="verdict">
+      <div class="no"><b data-t="h1_v"></b><span data-t="h1_r"></span></div>
+      <div class="yes"><b data-t="h2_v"></b><span data-t="h2_r"></span></div>
+    </div>
+    <div class="grid">
+      <figure><img src="/poster-assets/mae-by-method.svg" alt=""><figcaption data-t="cap_mae"></figcaption></figure>
+      <figure><img src="/poster-assets/sensitivity.svg" alt=""><figcaption data-t="cap_sens"></figcaption></figure>
+    </div>
+    <table>
+      <thead><tr><th data-t="t_comp"></th><th>MAE A</th><th>MAE B</th><th data-t="t_diff"></th><th>p</th><th>r</th></tr></thead>
+      <tbody>
+        <tr><td>HOLT vs SMA</td><td>216.6</td><td class="best">174.0</td><td>−24.5 %</td><td>&lt; 0.001</td><td>0.83</td></tr>
+        <tr><td>SMA vs NAIVE</td><td class="best">174.0</td><td>226.1</td><td>+23.0 %</td><td>&lt; 0.001</td><td>0.83</td></tr>
+        <tr><td>SES vs NAIVE</td><td>178.8</td><td>226.1</td><td>+20.9 %</td><td>&lt; 0.001</td><td>0.84</td></tr>
+        <tr><td>DAMPED vs HOLT *</td><td>195.6</td><td>216.6</td><td>+9.7 %</td><td>&lt; 0.001</td><td>0.82</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:6mm;color:var(--soft);margin-top:3mm" data-t="t_note"></p>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2><span class="n">5</span><span data-t="h_econ"></span></h2>
+      <table>
+        <thead><tr><th data-t="e_app"></th><th data-t="e_year"></th><th data-t="e_class"></th></tr></thead>
+        <tbody>
+          <tr><td class="best">CoinFlow</td><td class="best">0</td><td class="best">0</td></tr>
+          <tr><td>YNAB</td><td>1 955</td><td>58 660</td></tr>
+          <tr><td>Spendee Premium</td><td>412</td><td>12 370</td></tr>
+          <tr><td>Toshl Pro</td><td>359</td><td>10 760</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:5mm" data-t="econ"></p>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">6</span><span data-t="h_app"></span></h2>
+      <div class="shots"><img src="/poster-assets/home.png" alt=""><img src="/poster-assets/goals.png" alt=""></div>
+      <p style="margin-top:5mm" data-t="app"></p>
+    </section>
+  </div>
+
+  <section class="card conclusion">
+    <h2><span class="n">7</span><span data-t="h_concl"></span></h2>
+    <p data-t="concl"></p>
+  </section>
+
+  <footer>
+    <ol class="refs" data-list="refs"></ol>
+    <div style="max-width:260mm" data-t="ai"></div>
+  </footer>
+</div></div>
+
+<script>
+  const TEXT = {
+    ro: {
+      title: 'Ce algoritm prezice cel mai bine cheltuielile adolescenților? Cinci metode comparate într-o aplicație gratuită',
+      authors: 'Autor: ____________________ · clasa a XII-a · ____________________ · Coordonator: ____________________',
+      scan: 'Scanează și încearcă',
+      h_problem: 'Problema',
+      problem: 'Adolescenții primesc bani de buzunar și primele salarii, dar nu învață la școală să-i gestioneze. Aplicațiile de buget costă 359–1 955 lei pe an și nu cunosc leul, cursul BNM sau impozitele din Moldova.',
+      stat_scam: 'lei pierduți în fraude online în Moldova, în 2025 (IGP)', stat_free: 'lei: costul aplicației', stat_lang: 'limbi: RO / RU / EN',
+      h_hyp: 'Ipoteze (înregistrate înainte de experiment)',
+      h1: '<b>H1:</b> metoda Holt (cu tendință) are o eroare mai mică decât media mobilă pe 4 săptămâni (SMA), p < 0,05, și este cu ≥ 10 % mai precisă pe datele cu tendință.',
+      h2: '<b>H2:</b> toate metodele de netezire sunt mai bune decât prognoza naivă „ca săptămâna trecută”.',
+      h_method: 'Metodă',
+      method: ['150 de registre sintetice de cheltuieli × 26 săptămâni, 5 profiluri, semințe fixe (reproductibil)', '5 metode: NAIVE, SMA, SES, HOLT, DAMPED (exploratoriu); α, β, φ aleși automat doar din trecut', 'Evaluare cu origine glisantă: 2 700 de prognoze pe metodă', 'MAE, RMSE, sMAPE, timp de calcul · testul Wilcoxon, α = 0,05'],
+      cap_arch: 'Arhitectura: algoritmii rulează în browser; baza de date Supabase este protejată cu Row Level Security.',
+      h_results: 'Rezultate',
+      h1_v: 'H1 infirmată', h1_r: 'Holt a fost cu 24,5 % mai slab decât SMA (p < 0,001; r = 0,83), chiar și pe datele cu tendință.',
+      h2_v: 'H2 confirmată', h2_r: 'SMA, SES și HOLT sunt toate mai bune decât prognoza naivă (p < 0,01).',
+      cap_mae: 'Eroarea medie absolută (lei/săptămână). SMA este cea mai precisă: 174 lei.',
+      cap_sens: 'Când zgomotul scade, diferența dintre metode scade, dar SMA rămâne cea mai bună.',
+      t_comp: 'Comparație (Wilcoxon, 150 de registre)', t_diff: 'Diferență',
+      t_note: '* metodă exploratorie, adăugată după experimentul principal. Cod, date, 42 de teste: github.com/i-c-js/coin-flow',
+      h_econ: 'Beneficiul economic',
+      e_app: 'Aplicație', e_year: 'lei / an', e_class: 'clasă de 30 / an',
+      econ: 'Găzduirea este gratuită până la circa 1 000 de elevi și costă aproximativ 0,97 lei pe elev pe an la 10 000 de elevi. Prognoza rulează pe telefon (< 0,001 ms), deci nu are cost de server.',
+      h_app: 'Aplicația CoinFlow',
+      app: 'Cheltuieli în două atingeri, obiective ca borcane care se umplu, prognoza săptămânii (SMA), fluxul banilor, fluturașul de salariu (regulile din 2026), cursul BNM și lecții cu teste despre buget, economii și fraude.',
+      h_concl: 'Concluzie',
+      concl: 'Pe date scurte și zgomotoase, simplitatea câștigă: modelele cu tendință confundă vârfurile întâmplătoare cu tendințe. De aceea CoinFlow folosește media mobilă pe 4 săptămâni. Pasul următor: validarea pe date reale, anonimizate, de la voluntari.',
+      refs: ['Hyndman & Athanasopoulos (2021) Forecasting: Principles and Practice, ed. 3', 'Holt (2004) Int. J. Forecasting 20(1)', 'Gardner & McKenzie (1985) Management Science 31(10)', 'Makridakis & Hibon (2000) Int. J. Forecasting 16(4)', 'Wilcoxon (1945) Biometrics Bulletin 1(6)'],
+      ai: 'Utilizarea AI: designul paginii principale a fost făcut cu Claude Design, iar codul a fost scris cu asistentul Claude Code, după specificația și deciziile autorului. Totul a fost testat și documentat în AI_LOG.md.',
+    },
+    en: {
+      title: 'Which algorithm best predicts teenagers’ spending? Five methods compared inside a free app',
+      authors: 'Author: ____________________ · Grade 12 · ____________________ · Supervisor: ____________________',
+      scan: 'Scan and try it',
+      h_problem: 'Problem',
+      problem: 'Teenagers get pocket money and first salaries, but school doesn’t teach how to manage them. Budgeting apps cost 359–1 955 lei a year and know nothing about the leu, BNM rates or Moldovan taxes.',
+      stat_scam: 'lei lost to online scams in Moldova in 2025 (police data)', stat_free: 'lei: cost of the app', stat_lang: 'languages: RO / RU / EN',
+      h_hyp: 'Hypotheses (registered before the experiment)',
+      h1: '<b>H1:</b> Holt’s trend method has lower error than the 4-week moving average (SMA), p < 0.05, and is ≥ 10 % more accurate on trend data.',
+      h2: '<b>H2:</b> every smoothing method beats the naive “same as last week” forecast.',
+      h_method: 'Method',
+      method: ['150 synthetic spending ledgers × 26 weeks, 5 profiles, fixed seeds (reproducible)', '5 methods: NAIVE, SMA, SES, HOLT, DAMPED (exploratory); α, β, φ tuned automatically on past data only', 'Rolling-origin evaluation: 2 700 forecasts per method', 'MAE, RMSE, sMAPE, computation time · Wilcoxon signed-rank test, α = 0.05'],
+      cap_arch: 'Architecture: the algorithms run in the browser; the Supabase database is protected with Row Level Security.',
+      h_results: 'Results',
+      h1_v: 'H1 not supported', h1_r: 'Holt was 24.5 % worse than SMA (p < 0.001; r = 0.83), even on trend data.',
+      h2_v: 'H2 supported', h2_r: 'SMA, SES and HOLT all beat the naive forecast (p < 0.01).',
+      cap_mae: 'Mean absolute error (lei/week). SMA is the most accurate: 174 lei.',
+      cap_sens: 'With less noise the gap shrinks, but SMA stays best.',
+      t_comp: 'Comparison (Wilcoxon, 150 ledgers)', t_diff: 'Difference',
+      t_note: '* exploratory method, added after the main experiment. Code, data, 42 tests: github.com/i-c-js/coin-flow',
+      h_econ: 'Economic benefit',
+      e_app: 'App', e_year: 'lei / year', e_class: 'class of 30 / year',
+      econ: 'Hosting is free up to about 1 000 students and costs about 0.97 lei per student per year at 10 000 students. The forecast runs on the phone (< 0.001 ms), so it has no server cost.',
+      h_app: 'The CoinFlow app',
+      app: 'Two-tap expenses, goals as jars that fill up, the weekly forecast (SMA), money flow, a payslip explainer (2026 rules), BNM rates and lessons with quizzes on budgeting, saving and scams.',
+      h_concl: 'Conclusion',
+      concl: 'On short, noisy data, simplicity wins: trend models mistake random spikes for trends. That is why CoinFlow uses the 4-week moving average. Next step: validation on real, anonymised data from volunteers.',
+      refs: ['Hyndman & Athanasopoulos (2021) Forecasting: Principles and Practice, 3rd ed.', 'Holt (2004) Int. J. Forecasting 20(1)', 'Gardner & McKenzie (1985) Management Science 31(10)', 'Makridakis & Hibon (2000) Int. J. Forecasting 16(4)', 'Wilcoxon (1945) Biometrics Bulletin 1(6)'],
+      ai: 'AI use: the home page was designed with Claude Design, and the code was written with the Claude Code assistant following the author’s specification and decisions. Everything was tested and is documented in AI_LOG.md.',
+    },
+  };
+
+  const read = (k, d) => { try { return localStorage.getItem(k) || d; } catch { return d; } };
+  const write = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
+  let lang = read('a0-lang', 'ro');
+  const urlInput = document.getElementById('url');
+  urlInput.value = read('a0-url', 'https://coin-flow-theta.vercel.app');
+
+  function render() {
+    const t = TEXT[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-t]').forEach((el) => (el.innerHTML = t[el.dataset.t]));
+    document.querySelectorAll('[data-list]').forEach((el) => (el.innerHTML = t[el.dataset.list].map((x) => `<li>${x}</li>`).join('')));
+    const qr = qrcode(0, 'M');
+    qr.addData(urlInput.value.trim() || 'https://coin-flow-theta.vercel.app');
+    qr.make();
+    document.getElementById('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+  }
+
+  // Scale the real-size poster down so it fits the screen.
+  function fit() {
+    const poster = document.getElementById('poster');
+    const scale = Math.min(1, (window.innerWidth - 32) / poster.offsetWidth);
+    poster.style.transform = `scale(${scale})`;
+    poster.parentElement.style.height = poster.offsetHeight * scale + 48 + 'px';
+  }
+
+  document.querySelectorAll('[data-lang]').forEach((b) => b.addEventListener('click', () => { lang = b.dataset.lang; write('a0-lang', lang); render(); }));
+  urlInput.addEventListener('input', () => { write('a0-url', urlInput.value); render(); });
+  window.addEventListener('resize', fit);
+  render();
+  fit();
+</script>
+</body>
+</html>
