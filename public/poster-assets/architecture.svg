@@ -8,7 +8,7 @@
     <text x="40" y="106" font-size="15" font-weight="700" fill="#0f2233">Browser (phone / PC)</text>
     <text x="40" y="132" font-size="13" fill="#0f2233">Next.js + React pages, RO / RU / EN</text>
     <rect x="40" y="146" width="268" height="116" rx="10" fill="#fff" stroke="#3cc3b0"/>
-    <text x="52" y="168" font-size="13" font-weight="700" fill="#0b6e6e">src/lib — pure functions (42 tests)</text>
+    <text x="52" y="168" font-size="13" font-weight="700" fill="#0b6e6e">src/lib — pure functions (47 tests)</text>
     <text x="52" y="190" font-size="12.5" fill="#0f2233">• forecast: SMA (chosen by experiment)</text>
     <text x="52" y="210" font-size="12.5" fill="#0f2233">• payslip (Moldova 2026 rules)</text>
     <text x="52" y="230" font-size="12.5" fill="#0f2233">• goal estimate, what-if, money flow</text>

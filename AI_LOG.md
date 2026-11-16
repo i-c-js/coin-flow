@@ -54,6 +54,8 @@ These are my main requests in order (shortened). The full first prompt is in [`C
 | Economic analysis, abstract (Anexa 2), logbook (Anexa 3), A0 poster, pitch | drafted by Claude Code from the real results and public sources; I review, sign and present them |
 | Understanding the code and defending it | me: see `docs/HOW_IT_WORKS.md` and the Q&A table in `docs/PRESENTATION.md` |
 
+| Unusual-spending warning (`src/lib/forecast/anomaly.ts`, z-score > 2) — the evaluator's anomaly-detection suggestion | written by Claude Code at my request (16 Nov 2026); 5 tests |
+
 **Validation steps:** the hypothesis was committed to git (23:15) before the benchmark ran (23:18), so the order can be checked. H1 was rejected and is reported as rejected, not tuned until it passed. The methods added afterwards (damped trend, sensitivity analysis) are labelled **exploratory**. All results can be reproduced with `npm run benchmark`.
 
 ## Problems found and how they were fixed

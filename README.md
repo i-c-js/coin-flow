@@ -82,7 +82,7 @@ You need [Node.js](https://nodejs.org) 20+ and a free [Supabase](https://supabas
 | Command | What it does |
 |---|---|
 | `npm run dev` | Start the app for development |
-| `npm test` | Run the 42 unit tests |
+| `npm test` | Run the 47 unit tests |
 | `npm run benchmark` | Repeat the forecasting experiment (about 1 s) |
 | `npm run figures` | Redraw the research figures |
 | `npm run lint` | Check the code style |

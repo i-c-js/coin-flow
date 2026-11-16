@@ -80,7 +80,7 @@ Example: 1 200 lei goal, 400 saved, 150/month → 800 ÷ 150 = 5.33 → **6 mont
 
 - **Why Supabase and not your own server?** It's free, gives a real database and login, and RLS keeps data safe without writing a backend.
 - **What if the bank's website is down?** The API route catches the error and returns sample rates with `sample: true`; the page shows a "sample rates" warning.
-- **How do you know the calculations are right?** 42 unit tests with examples calculated by hand, and GitHub runs them on every push.
+- **How do you know the calculations are right?** 47 unit tests with examples calculated by hand, and GitHub runs them on every push.
 - **What would you add next?** A monthly budget limit with a warning, reminders, sharing a goal with a friend, an installable phone app (PWA).
 - **What did AI do and what did you do?** See `AI_LOG.md`. Be honest and specific.
 
@@ -103,6 +103,7 @@ Files: `src/lib/forecast/`. Read them in this order:
 4. `synthetic.ts`: how the 150 test ledgers are generated (fixed seeds, so the result is always the same).
 5. `stats.ts`: the Wilcoxon test that tells whether a difference is real or luck.
 6. `weekly.ts`: how the app turns your transactions into weekly totals and uses the winning method (SMA).
+7. `anomaly.ts`: the "unusual week" warning. If this week is more than 2 standard deviations above the average of past weeks (z-score > 2), the summary page shows a warning.
 
 Try it: run `npm run benchmark` and compare the output with `research/RESULTS.md`. Then change `window = 4` to `window = 6` in the `sma` function in `methods.ts`, run it again and see how the error changes (change it back afterwards).
 

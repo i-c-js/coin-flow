@@ -37,3 +37,4 @@
 - [x] Abstract Anexa 2 + graphical annex (RO, EN docx; 2+1 pages, TNR 12, <1 MB)
 - [x] A0 poster (/poster-a0.html), 3-min RO/EN pitch + Q&A prep (docs/PRESENTATION.md)
 - [ ] User: fill name/school/supervisor in abstracts, logbook, A0 poster; sign logbook; practise live code changes
+- [x] Unusual-spending warning (z-score) on summary page, 5 tests (2026-11-16). Real public dataset checked: Kaggle "Daily Transactions" is dummy data, not used.

@@ -224,7 +224,8 @@
     "soFar": "Până acum: {spent} lei.",
     "over": "Ai depășit prognoza.",
     "under": "Ești sub prognoză.",
-    "how": "Cum calculăm prognoza?"
+    "how": "Cum calculăm prognoza?",
+    "unusual": "Săptămâna asta cheltui mult mai mult decât de obicei. Verifică dacă toate cheltuielile erau planificate."
   },
   "research": {
     "kicker": "Cercetare",

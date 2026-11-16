@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, PiggyBank, TrendingUp } from "lucide-react";
+import { ChevronLeft, ChevronRight, PiggyBank, TrendingUp, TriangleAlert } from "lucide-react";
 import AuthGuard from "@/components/AuthGuard";
 import EmptyState from "@/components/EmptyState";
 import CategoryChart from "@/components/CategoryChart";
 import MoneyFlowChart from "@/components/MoneyFlowChart";
 import { buildMoneyFlow } from "@/lib/flow";
 import { forecastNextWeekBani, weeklyExpenseTotals } from "@/lib/forecast/weekly";
+import { isUnusualWeek } from "@/lib/forecast/anomaly";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { supabase } from "@/lib/supabase";
 import { addDays, formatBani, startOfWeek, toDateString } from "@/lib/money";
@@ -68,6 +69,8 @@ function Summary() {
   const flow = buildMoneyFlow(monthTx);
   const monthName = new Date().toLocaleDateString(lang, { month: "long", year: "numeric" });
   const total = sumByType(transactions, "expense");
+  // Warn when this week is already far above the usual weeks (only if we have enough history).
+  const unusual = forecast !== null && isUnusualWeek(pastWeeks, total);
   const byCategory = spendingByCategory(transactions);
   const range = `${monday.toLocaleDateString(lang, { day: "numeric", month: "short" })} – ${sunday.toLocaleDateString(lang, { day: "numeric", month: "short" })}`;
 
@@ -105,6 +108,11 @@ function Summary() {
                     {total > forecast ? t("forecast.over") : t("forecast.under")}
                   </span>
                 </p>
+                {unusual && (
+                  <p role="alert" className="mt-2 flex items-start gap-2 rounded-2xl bg-coral/10 px-3 py-2 text-sm font-semibold text-coral">
+                    <TriangleAlert size={18} className="mt-0.5 shrink-0" /> {t("forecast.unusual")}
+                  </p>
+                )}
                 <div className="mt-2 h-2.5 overflow-hidden rounded-pill bg-foam">
                   <div
                     className={`h-full rounded-pill ${total > forecast ? "bg-coral" : "bg-wave"}`}

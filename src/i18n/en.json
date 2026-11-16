@@ -224,7 +224,8 @@
     "soFar": "So far: {spent} lei.",
     "over": "You are above the forecast.",
     "under": "You are below the forecast.",
-    "how": "How is the forecast calculated?"
+    "how": "How is the forecast calculated?",
+    "unusual": "This week you are spending much more than usual. Check that every expense was planned."
   },
   "research": {
     "kicker": "Research",
